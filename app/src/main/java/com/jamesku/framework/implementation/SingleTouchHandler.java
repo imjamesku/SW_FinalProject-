@@ -34,7 +34,7 @@ public class SingleTouchHandler implements TouchHandler {
         this.scaleY = scaleY;
     }
 
-    
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         synchronized(this) {

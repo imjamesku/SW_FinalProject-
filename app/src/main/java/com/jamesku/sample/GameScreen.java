@@ -321,7 +321,8 @@ public class GameScreen extends Screen {
         ArrayList projectiles = robot.getProjectiles();
         for (int i = 0; i < projectiles.size(); i++) {
             Projectile p = (Projectile) projectiles.get(i);
-            g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
+            //g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
+            g.drawCircle(p.getX(), p.getY(), 30, Color.WHITE);
         }
         // First draw the game elements.
 
