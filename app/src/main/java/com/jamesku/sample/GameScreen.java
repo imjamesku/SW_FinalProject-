@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 
 import com.jamesku.framework.Game;
 import com.jamesku.framework.Graphics;
@@ -39,12 +40,14 @@ public class GameScreen extends Screen {
     private int gravity;
     private int addBallFreq;
     private int addBallCounter;
+    private int score;
 
     public GameScreen(Game game) {
         super(game);
         gravity = 1;
         addBallFreq = 5;
         addBallCounter = 0;
+        score = 0;
 
         // Initialize game objects here
 
@@ -259,12 +262,28 @@ public class GameScreen extends Screen {
             }
         }
         removeTouchedBalls(touchEvents);
+
+        /*
         if(addBallCounter >= addBallFreq) {
             addBalls(1);
             addBallCounter = 0;
         }
         else
             addBallCounter++;
+        */
+        /*
+        if(addBallCounter  == 0){
+            addBalls(1);
+            addBallCounter++;
+        }
+        */
+
+        if(balls.size() == 0)
+            addBalls(1);
+        else if(balls.size()<10 && (score/50 > balls.size()-1) ){
+            addBalls(1);
+        }
+
         updateBalls();
 
         updateTiles();
@@ -283,7 +302,7 @@ public class GameScreen extends Screen {
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random()*20);
             Ball newBall = new Ball(randX, 0, 35, Color.WHITE);
-            newBall.setSpeedX(randSpeedX);
+            newBall.setSpeedX(randSpeedX-10);
             newBall.setSpeedY(0);
             balls.add(newBall);
         }
@@ -297,7 +316,13 @@ public class GameScreen extends Screen {
                 balls.remove(i);
             }
             else{
-                ball.setSpeedY(ball.getSpeedY() + gravity);
+                if(ball.getSpeedY()+gravity<10)
+                    ball.setSpeedY(ball.getSpeedY() + gravity);
+                else
+                    ball.setSpeedY(10);
+
+                    //ball.update();
+
                 ball.update();
             }
         }
@@ -311,7 +336,9 @@ public class GameScreen extends Screen {
             for(int i=len-1; i>=0; i--){
                 Ball b = balls.get(i);
                 if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius())){
-                    balls.remove(i);
+                    //balls.remove(i);
+                    score += 5;
+                    b.touchedBounce();
                     break;
                 }
             }
@@ -413,6 +440,7 @@ public class GameScreen extends Screen {
             drawReadyUI();
         if (state == GameState.Running)
             drawRunningUI();
+
         if (state == GameState.Paused)
             drawPausedUI();
         if (state == GameState.GameOver)
@@ -469,12 +497,26 @@ public class GameScreen extends Screen {
 
     }
 
+    private void drawScore() {
+        Graphics g = game.getGraphics();
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(25);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
+        g.drawString("Score" + score,350,80,paint);
+
+    }
+
     private void drawRunningUI() {
         Graphics g = game.getGraphics();
         g.drawImage(Assets.button, 0, 285, 0, 0, 65, 65);
         g.drawImage(Assets.button, 0, 350, 0, 65, 65, 65);
         g.drawImage(Assets.button, 0, 415, 0, 130, 65, 65);
         g.drawImage(Assets.button, 0, 0, 0, 195, 35, 35);
+
+        drawScore();
 
     }
 

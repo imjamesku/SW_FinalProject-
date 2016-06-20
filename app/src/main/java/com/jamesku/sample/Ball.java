@@ -8,6 +8,7 @@ import com.jamesku.framework.Graphics;
 public class Ball extends GameObject {
     private int radius;
     private int color;
+    private int dropFreq;
     private boolean visible;
     final private int BOTTOM_BOARDER = 800;
     final private int RIGHT_BOARDER = 480;
@@ -20,6 +21,7 @@ public class Ball extends GameObject {
         setSpeedX(0);
         setSpeedY(0);
         setVisible(true);
+        setDropFreq(0);
     }
 
     public void update(){
@@ -38,15 +40,27 @@ public class Ball extends GameObject {
             setCenterX(getCenterX() + getSpeedX());
         }
 
+        if(getCenterX() + getSpeedX() - getRadius() <= 0){
+            bounce();
+            setCenterX(getRadius());
+        }else{
+            setCenterX(getCenterX() + getSpeedX());
+        }
+
     }
 
     private void bounce(){
-        setSpeedX((int)(-getSpeedX()*0.7));
+        setSpeedX((int) (-getSpeedX() * 0.7));
     }
 
     public void touchedBounce(){
-        setSpeedX((int)(-getSpeedX()*0.7));
-        setSpeedY((int)(-getSpeedY()*0.7));
+
+        if(getSpeedY()>0) {
+            int randSpeedX = (int) (Math.random()*5);
+            //setSpeedX((int) (-getSpeedX() * 0.7));
+            setSpeedX((int) (-getSpeedX() + randSpeedX));
+            setSpeedY((int) (-getSpeedY() * 4));
+        }
     }
 
     public void draw(Graphics g){
@@ -57,6 +71,8 @@ public class Ball extends GameObject {
     public int getRadius() {
         return radius;
     }
+
+    public int getDropFreq(){return  dropFreq;}
 
     public void setRadius(int radius) {
         this.radius = radius;
@@ -77,5 +93,9 @@ public class Ball extends GameObject {
     public void setColor(int color) {
         this.color = color;
 
+    }
+
+    public void setDropFreq(int dropFreq){
+        this.dropFreq = dropFreq;
     }
 }
