@@ -1,6 +1,7 @@
 package com.jamesku.sample;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import android.graphics.Color;
@@ -52,6 +53,8 @@ public class GameScreen extends Screen {
         robot = new Robot();
         hb = new Heliboy(340, 360);
         hb2 = new Heliboy(700, 360);
+
+
 
         character = Assets.character;
         character2 = Assets.character2;
@@ -171,6 +174,7 @@ public class GameScreen extends Screen {
 
         // 1. All touch input is handled here:
         int len = touchEvents.size();
+        //System.out.println("111 " + len);
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_DOWN) {
@@ -226,6 +230,7 @@ public class GameScreen extends Screen {
             }
 
         }
+      //  System.out.println("222 " + touchEvents.size());
 
 
         // 2. Check miscellaneous events like death:
@@ -253,6 +258,7 @@ public class GameScreen extends Screen {
                 projectiles.remove(i);
             }
         }
+        removeTouchedBalls(touchEvents);
         if(addBallCounter >= addBallFreq) {
             addBalls(1);
             addBallCounter = 0;
@@ -278,7 +284,7 @@ public class GameScreen extends Screen {
             int randSpeedX = (int) (Math.random()*20);
             Ball newBall = new Ball(randX, 0, 35, Color.WHITE);
             newBall.setSpeedX(randSpeedX);
-            newBall.setSpeedY(20);
+            newBall.setSpeedY(0);
             balls.add(newBall);
         }
     }
@@ -297,6 +303,21 @@ public class GameScreen extends Screen {
         }
     }
 
+    private void removeTouchedBalls(List touchEvents){
+      //  System.out.println(touchEvents.size());
+        for(Object o: touchEvents){
+            TouchEvent event = (TouchEvent)o;
+            int len = balls.size();
+            for(int i=len-1; i>=0; i--){
+                Ball b = balls.get(i);
+                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius())){
+                    balls.remove(i);
+                    break;
+                }
+            }
+        }
+    }
+
     private boolean inBounds(TouchEvent event, int x, int y, int width,
                              int height) {
         if (event.x > x && event.x < x + width - 1 && event.y > y
@@ -304,6 +325,12 @@ public class GameScreen extends Screen {
             return true;
         else
             return false;
+    }
+    private boolean inCircle(TouchEvent event, int x, int y, int radius){
+        int distance2 = (event.x - x) * (event.x - x) + (event.y - y) * (event.y - y);
+        if(distance2 < radius*radius)
+            return true;
+        return false;
     }
 
     private void updatePaused(List touchEvents) {

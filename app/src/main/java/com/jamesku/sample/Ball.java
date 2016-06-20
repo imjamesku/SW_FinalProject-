@@ -44,6 +44,11 @@ public class Ball extends GameObject {
         setSpeedX((int)(-getSpeedX()*0.7));
     }
 
+    public void touchedBounce(){
+        setSpeedX((int)(-getSpeedX()*0.7));
+        setSpeedY((int)(-getSpeedY()*0.7));
+    }
+
     public void draw(Graphics g){
         if(isVisible())
             g.drawCircle(getCenterX(), getCenterY(), getRadius(), getColor());
