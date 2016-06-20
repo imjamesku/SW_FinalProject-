@@ -1,10 +1,12 @@
 package com.jamesku.sample;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 
 import com.jamesku.framework.Game;
 import com.jamesku.framework.Graphics;
@@ -24,6 +26,7 @@ public class GameScreen extends Screen {
     private static Background bg1, bg2;
     private static Robot robot;
     public static Heliboy hb, hb2;
+    public static ArrayList<Ball> balls = new ArrayList<Ball>();
 
     private Image currentSprite, character, character2, character3, heliboy,
             heliboy2, heliboy3, heliboy4, heliboy5;
@@ -34,8 +37,17 @@ public class GameScreen extends Screen {
     int livesLeft = 1;
     Paint paint, paint2;
 
+    private int gravity;
+    private int addBallFreq;
+    private int addBallCounter;
+    private int score;
+
     public GameScreen(Game game) {
         super(game);
+        gravity = 1;
+        addBallFreq = 5;
+        addBallCounter = 0;
+        score = 0;
 
         // Initialize game objects here
 
@@ -44,6 +56,8 @@ public class GameScreen extends Screen {
         robot = new Robot();
         hb = new Heliboy(340, 360);
         hb2 = new Heliboy(700, 360);
+
+
 
         character = Assets.character;
         character2 = Assets.character2;
@@ -163,6 +177,7 @@ public class GameScreen extends Screen {
 
         // 1. All touch input is handled here:
         int len = touchEvents.size();
+        //System.out.println("111 " + len);
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_DOWN) {
@@ -218,6 +233,8 @@ public class GameScreen extends Screen {
             }
 
         }
+      //  System.out.println("222 " + touchEvents.size());
+
 
         // 2. Check miscellaneous events like death:
 
@@ -244,6 +261,30 @@ public class GameScreen extends Screen {
                 projectiles.remove(i);
             }
         }
+        removeTouchedBalls(touchEvents);
+
+        /*
+        if(addBallCounter >= addBallFreq) {
+            addBalls(1);
+            addBallCounter = 0;
+        }
+        else
+            addBallCounter++;
+        */
+        /*
+        if(addBallCounter  == 0){
+            addBalls(1);
+            addBallCounter++;
+        }
+        */
+
+        if(balls.size() == 0)
+            addBalls(1);
+        else if(balls.size()<10 && (score/50 > balls.size()-1) ){
+            addBalls(1);
+        }
+
+        updateBalls();
 
         updateTiles();
         hb.update();
@@ -256,6 +297,53 @@ public class GameScreen extends Screen {
             state = GameState.GameOver;
         }
     }
+    private void addBalls(int numberOfBallsAdded){
+        for(int i=0; i<numberOfBallsAdded; i++){
+            int randX = (int) (Math.random() * 800);
+            int randSpeedX = (int) (Math.random()*20);
+            Ball newBall = new Ball(randX, 0, 35, Color.WHITE);
+            newBall.setSpeedX(randSpeedX-10);
+            newBall.setSpeedY(0);
+            balls.add(newBall);
+        }
+    }
+    private void updateBalls(){
+        int len = balls.size();
+
+        for(int i = len-1; i>=0; i--){
+            Ball ball = balls.get(i);
+            if(ball.isVisible() == false){
+                balls.remove(i);
+            }
+            else{
+                if(ball.getSpeedY()+gravity<10)
+                    ball.setSpeedY(ball.getSpeedY() + gravity);
+                else
+                    ball.setSpeedY(10);
+
+                    //ball.update();
+
+                ball.update();
+            }
+        }
+    }
+
+    private void removeTouchedBalls(List touchEvents){
+      //  System.out.println(touchEvents.size());
+        for(Object o: touchEvents){
+            TouchEvent event = (TouchEvent)o;
+            int len = balls.size();
+            for(int i=len-1; i>=0; i--){
+                Ball b = balls.get(i);
+                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius())){
+                    //balls.remove(i);
+                    score += 5;
+                    b.touchedBounce();
+                    break;
+                }
+            }
+        }
+    }
 
     private boolean inBounds(TouchEvent event, int x, int y, int width,
                              int height) {
@@ -264,6 +352,12 @@ public class GameScreen extends Screen {
             return true;
         else
             return false;
+    }
+    private boolean inCircle(TouchEvent event, int x, int y, int radius){
+        int distance2 = (event.x - x) * (event.x - x) + (event.y - y) * (event.y - y);
+        if(distance2 < radius*radius)
+            return true;
+        return false;
     }
 
     private void updatePaused(List touchEvents) {
@@ -314,6 +408,7 @@ public class GameScreen extends Screen {
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
 
+        g.drawRect(0, 0, 490, 810, Color.BLACK);
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
         g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
         paintTiles(g);
@@ -321,7 +416,11 @@ public class GameScreen extends Screen {
         ArrayList projectiles = robot.getProjectiles();
         for (int i = 0; i < projectiles.size(); i++) {
             Projectile p = (Projectile) projectiles.get(i);
-            g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
+            //g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
+            g.drawCircle(p.getX(), p.getY(), 30, Color.WHITE);
+        }
+        for(Ball b: balls){
+            b.draw(g);
         }
         // First draw the game elements.
 
@@ -341,6 +440,7 @@ public class GameScreen extends Screen {
             drawReadyUI();
         if (state == GameState.Running)
             drawRunningUI();
+
         if (state == GameState.Paused)
             drawPausedUI();
         if (state == GameState.GameOver)
@@ -397,12 +497,26 @@ public class GameScreen extends Screen {
 
     }
 
+    private void drawScore() {
+        Graphics g = game.getGraphics();
+
+        Paint paint = new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setTextSize(25);
+        paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+
+        g.drawString("Score" + score,350,80,paint);
+
+    }
+
     private void drawRunningUI() {
         Graphics g = game.getGraphics();
         g.drawImage(Assets.button, 0, 285, 0, 0, 65, 65);
         g.drawImage(Assets.button, 0, 350, 0, 65, 65, 65);
         g.drawImage(Assets.button, 0, 415, 0, 130, 65, 65);
         g.drawImage(Assets.button, 0, 0, 0, 195, 35, 35);
+
+        drawScore();
 
     }
 
