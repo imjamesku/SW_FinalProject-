@@ -8,6 +8,8 @@ import com.jamesku.framework.Graphics;
 public class Ball extends GameObject {
     private int radius;
     private int color;
+    private boolean visible;
+    final private int BOTTOM_BOARD = 480;
 
     public Ball(int x, int y, int radius, int color){
         setCenterX(x);
@@ -16,6 +18,14 @@ public class Ball extends GameObject {
         setColor(color);
         setSpeedX(0);
         setSpeedY(0);
+    }
+
+    public void update(){
+        if(getCenterY() + getSpeedY() - radius >= BOTTOM_BOARD) {
+            setVisible(false);
+            return;
+        }
+        
     }
 
     public void draw(Graphics g){
@@ -34,7 +44,16 @@ public class Ball extends GameObject {
         return color;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public void setColor(int color) {
         this.color = color;
+
     }
 }

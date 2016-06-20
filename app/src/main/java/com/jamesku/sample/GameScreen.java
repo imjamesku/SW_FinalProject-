@@ -220,6 +220,7 @@ public class GameScreen extends Screen {
 
         }
 
+
         // 2. Check miscellaneous events like death:
 
         if (livesLeft == 0) {
@@ -255,6 +256,12 @@ public class GameScreen extends Screen {
 
         if (robot.getCenterY() > 500) {
             state = GameState.GameOver;
+        }
+    }
+    private void updateBalls(){
+        int len = balls.size();
+        for (int i=0; i<len; i++){
+
         }
     }
 
