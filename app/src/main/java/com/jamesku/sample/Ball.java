@@ -9,7 +9,8 @@ public class Ball extends GameObject {
     private int radius;
     private int color;
     private boolean visible;
-    final private int BOTTOM_BOARD = 480;
+    final private int BOTTOM_BOARDER = 480;
+    final private int RIGHT_BOARDER = 800;
 
     public Ball(int x, int y, int radius, int color){
         setCenterX(x);
@@ -18,18 +19,34 @@ public class Ball extends GameObject {
         setColor(color);
         setSpeedX(0);
         setSpeedY(0);
+        setVisible(true);
     }
 
     public void update(){
-        if(getCenterY() + getSpeedY() - radius >= BOTTOM_BOARD) {
+        if(getCenterY() + getSpeedY() - getRadius() >= BOTTOM_BOARDER) {
             setVisible(false);
             return;
         }
-        
+        else{
+            setCenterY(getCenterY() + getSpeedY());
+        }
+        if(getCenterX() + getSpeedX() + getRadius() >= RIGHT_BOARDER){
+            bounce();
+            setCenterX(RIGHT_BOARDER - getRadius());
+        }
+        else{
+            setCenterX(getCenterX() + getSpeedX());
+        }
+
+    }
+
+    private void bounce(){
+        setSpeedX((int)(-getSpeedX()*0.7));
     }
 
     public void draw(Graphics g){
-        g.drawCircle(getCenterX(), getCenterY(), getRadius(), getColor());
+        if(isVisible())
+            g.drawCircle(getCenterX(), getCenterY(), getRadius(), getColor());
     }
 
     public int getRadius() {
