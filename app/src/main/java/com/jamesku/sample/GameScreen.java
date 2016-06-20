@@ -35,8 +35,15 @@ public class GameScreen extends Screen {
     int livesLeft = 1;
     Paint paint, paint2;
 
+    private int gravity;
+    private int addBallFreq;
+    private int addBallCounter;
+
     public GameScreen(Game game) {
         super(game);
+        gravity = 1;
+        addBallFreq = 5;
+        addBallCounter = 0;
 
         // Initialize game objects here
 
@@ -246,6 +253,13 @@ public class GameScreen extends Screen {
                 projectiles.remove(i);
             }
         }
+        if(addBallCounter >= addBallFreq) {
+            addBalls(1);
+            addBallCounter = 0;
+        }
+        else
+            addBallCounter++;
+        updateBalls();
 
         updateTiles();
         hb.update();
@@ -258,10 +272,28 @@ public class GameScreen extends Screen {
             state = GameState.GameOver;
         }
     }
+    private void addBalls(int numberOfBallsAdded){
+        for(int i=0; i<numberOfBallsAdded; i++){
+            int randX = (int) (Math.random() * 800);
+            int randSpeedX = (int) (Math.random()*20);
+            Ball newBall = new Ball(randX, 0, 35, Color.WHITE);
+            newBall.setSpeedX(randSpeedX);
+            newBall.setSpeedY(20);
+            balls.add(newBall);
+        }
+    }
     private void updateBalls(){
         int len = balls.size();
-        for (int i=0; i<len; i++){
 
+        for(int i = len-1; i>=0; i--){
+            Ball ball = balls.get(i);
+            if(ball.isVisible() == false){
+                balls.remove(i);
+            }
+            else{
+                ball.setSpeedY(ball.getSpeedY() + gravity);
+                ball.update();
+            }
         }
     }
 
@@ -322,6 +354,7 @@ public class GameScreen extends Screen {
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
 
+        g.drawRect(0, 0, 490, 810, Color.BLACK);
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
         g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
         paintTiles(g);
@@ -331,6 +364,9 @@ public class GameScreen extends Screen {
             Projectile p = (Projectile) projectiles.get(i);
             //g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
             g.drawCircle(p.getX(), p.getY(), 30, Color.WHITE);
+        }
+        for(Ball b: balls){
+            b.draw(g);
         }
         // First draw the game elements.
 

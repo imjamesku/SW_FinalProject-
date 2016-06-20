@@ -9,8 +9,8 @@ public class Ball extends GameObject {
     private int radius;
     private int color;
     private boolean visible;
-    final private int BOTTOM_BOARDER = 480;
-    final private int RIGHT_BOARDER = 800;
+    final private int BOTTOM_BOARDER = 800;
+    final private int RIGHT_BOARDER = 480;
 
     public Ball(int x, int y, int radius, int color){
         setCenterX(x);
