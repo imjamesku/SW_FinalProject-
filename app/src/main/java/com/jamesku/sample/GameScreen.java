@@ -24,6 +24,7 @@ public class GameScreen extends Screen {
     private static Background bg1, bg2;
     private static Robot robot;
     public static Heliboy hb, hb2;
+    public static ArrayList<Ball> balls = new ArrayList<Ball>();
 
     private Image currentSprite, character, character2, character3, heliboy,
             heliboy2, heliboy3, heliboy4, heliboy5;
