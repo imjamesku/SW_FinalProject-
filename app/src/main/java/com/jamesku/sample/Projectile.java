@@ -32,6 +32,7 @@ public class Projectile {
     }
 
     private void checkCollision() {
+       /*
         if(Rect.intersects(r, GameScreen.hb.r)){
             visible = false;
 
@@ -58,6 +59,7 @@ public class Projectile {
             }
 
         }
+        */
     }
 
 

@@ -9,19 +9,21 @@ public class Ball extends GameObject {
     private int radius;
     private int color;
     private int dropFreq;
+    private int kind;
+    private Animation animation;
     private boolean visible;
     final private int BOTTOM_BOARDER = 800;
     final private int RIGHT_BOARDER = 480;
 
-    public Ball(int x, int y, int radius, int color){
+    public Ball(int x, int y){
         setCenterX(x);
         setCenterY(y);
-        setRadius(radius);
-        setColor(color);
         setSpeedX(0);
         setSpeedY(0);
         setVisible(true);
         setDropFreq(0);
+        setKind(0);
+        setAnimation(null);
     }
 
     public void update(){
@@ -64,8 +66,10 @@ public class Ball extends GameObject {
     }
 
     public void draw(Graphics g){
-        if(isVisible())
-            g.drawCircle(getCenterX(), getCenterY(), getRadius(), getColor());
+        if(isVisible()) {
+            //g.drawCircle(getCenterX(), getCenterY(), getRadius(), getColor());
+            g.drawImage(animation.getImage(), getCenterX()-getRadius(), getCenterY()-getRadius());
+        }
     }
 
     public int getRadius() {
@@ -97,5 +101,20 @@ public class Ball extends GameObject {
 
     public void setDropFreq(int dropFreq){
         this.dropFreq = dropFreq;
+    }
+    public int getKind() {
+        return kind;
+    }
+
+    public void setKind(int kind) {
+        this.kind = kind;
+    }
+
+
+    public void setAnimation(Animation animation) {
+        this.animation = animation;
+    }
+    public Animation getAnimation() {
+        return animation;
     }
 }

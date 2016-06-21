@@ -10,7 +10,7 @@ public class Tile {
     public int type;
     public Image tileImage;
 
-    private Robot robot = GameScreen.getRobot();
+   // private Robot robot = GameScreen.getRobot();
     private Background bg = GameScreen.getBg1();
 
     private Rect r;
@@ -47,11 +47,12 @@ public class Tile {
         r.set(tileX, tileY, tileX+40, tileY+40);
 
 
-
+        /*
         if (Rect.intersects(r, Robot.yellowRed) && type != 0) {
             checkVerticalCollision(Robot.rect, Robot.rect2);
             checkSideCollision(Robot.rect3, Robot.rect4, Robot.footleft, Robot.footright);
         }
+        */
 
     }
 
@@ -84,14 +85,17 @@ public class Tile {
 
         }
 
+        /*
         if (Rect.intersects(rbot, r) && type == 8) {
             robot.setJumped(false);
             robot.setSpeedY(0);
             robot.setCenterY(tileY - 63);
         }
+        */
     }
 
     public void checkSideCollision(Rect rleft, Rect rright, Rect leftfoot, Rect rightfoot) {
+        /*
         if (type != 5 && type != 2 && type != 0){
             if (Rect.intersects(rleft, r)) {
                 robot.setCenterX(tileX + 102);
@@ -115,6 +119,7 @@ public class Tile {
                 robot.setSpeedX(0);
             }
         }
+    */
     }
 
 }

@@ -24,13 +24,19 @@ public class GameScreen extends Screen {
     // Variable Setup
 
     private static Background bg1, bg2;
-    private static Robot robot;
-    public static Heliboy hb, hb2;
+    //private static Robot robot;
+    //public static Heliboy hb, hb2;
     public static ArrayList<Ball> balls = new ArrayList<Ball>();
 
-    private Image currentSprite, character, character2, character3, heliboy,
-            heliboy2, heliboy3, heliboy4, heliboy5;
-    private Animation anim, hanim;
+ //   private Image currentSprite, character, character2, character3, heliboy,
+ //           heliboy2, heliboy3, heliboy4, heliboy5;
+ //   private Animation anim, hanim;
+
+    private Image soccer,soccer2,soccer3,soccer4,soccer5,soccer6,soccer7,soccer8;
+    private Animation socceranim;
+
+    private Image sand,sand2,sand3,sand4,sand5,sand6,sand7,sand8,sand9,sand10,sand11,sand12,sand13,sand14,sand15;
+    private Animation sandanim;
 
     private ArrayList tilearray = new ArrayList();
 
@@ -41,6 +47,7 @@ public class GameScreen extends Screen {
     private int addBallFreq;
     private int addBallCounter;
     private int score;
+    private int HP;
 
     public GameScreen(Game game) {
         super(game);
@@ -48,11 +55,13 @@ public class GameScreen extends Screen {
         addBallFreq = 5;
         addBallCounter = 0;
         score = 0;
+        HP = 100;
 
         // Initialize game objects here
 
         bg1 = new Background(0, 0);
         bg2 = new Background(2160, 0);
+    /*
         robot = new Robot();
         hb = new Heliboy(340, 360);
         hb2 = new Heliboy(700, 360);
@@ -84,8 +93,62 @@ public class GameScreen extends Screen {
         hanim.addFrame(heliboy4, 100);
         hanim.addFrame(heliboy3, 100);
         hanim.addFrame(heliboy2, 100);
+    */
 
-        currentSprite = anim.getImage();
+        soccer = Assets.soccer;
+        soccer2 = Assets.soccer2;
+        soccer3 = Assets.soccer3;
+        soccer4 = Assets.soccer4;
+        soccer5 = Assets.soccer5;
+        soccer6 = Assets.soccer6;
+        soccer7 = Assets.soccer7;
+        soccer8 = Assets.soccer8;
+
+        socceranim = new Animation();
+        socceranim.addFrame(soccer,100);
+        socceranim.addFrame(soccer2,100);
+        socceranim.addFrame(soccer3,100);
+        socceranim.addFrame(soccer4,100);
+        socceranim.addFrame(soccer5,100);
+        socceranim.addFrame(soccer6,100);
+        socceranim.addFrame(soccer7,100);
+        socceranim.addFrame(soccer8,100);
+
+        sand = Assets.sand;
+        sand2 = Assets.sand2;
+        sand3 = Assets.sand3;
+        sand4 = Assets.sand4;
+        sand5 = Assets.sand5;
+        sand6 = Assets.sand6;
+        sand7 = Assets.sand7;
+        sand8 = Assets.sand8;
+        sand9 = Assets.sand9;
+        sand10 = Assets.sand10;
+        sand11 = Assets.sand11;
+        sand12 = Assets.sand12;
+        sand13 = Assets.sand13;
+        sand14 = Assets.sand14;
+        sand15 = Assets.sand15;
+
+        sandanim = new Animation();
+        sandanim.addFrame(sand,50);
+        sandanim.addFrame(sand2,50);
+        sandanim.addFrame(sand3,50);
+        sandanim.addFrame(sand4,50);
+        sandanim.addFrame(sand5,50);
+        sandanim.addFrame(sand6,50);
+        sandanim.addFrame(sand7,50);
+        sandanim.addFrame(sand8,50);
+        sandanim.addFrame(sand9,50);
+        sandanim.addFrame(sand10,50);
+        sandanim.addFrame(sand11,50);
+        sandanim.addFrame(sand12,50);
+        sandanim.addFrame(sand13,50);
+        sandanim.addFrame(sand14,50);
+        sandanim.addFrame(sand15,50);
+
+
+      //  currentSprite = anim.getImage();
 
         loadMap();
 
@@ -176,6 +239,7 @@ public class GameScreen extends Screen {
         // This is identical to the update() method from our Unit 2/3 game.
 
         // 1. All touch input is handled here:
+  /*
         int len = touchEvents.size();
         //System.out.println("111 " + len);
         for (int i = 0; i < len; i++) {
@@ -233,18 +297,22 @@ public class GameScreen extends Screen {
             }
 
         }
+        */
       //  System.out.println("222 " + touchEvents.size());
 
 
         // 2. Check miscellaneous events like death:
 
+        /*
         if (livesLeft == 0) {
             state = GameState.GameOver;
         }
-
+*/
         // 3. Call individual update() methods here.
         // This is where all the game updates happen.
         // For example, robot.update();
+
+     /*
         robot.update();
         if (robot.isJumped()) {
             currentSprite = Assets.characterJump;
@@ -261,6 +329,8 @@ public class GameScreen extends Screen {
                 projectiles.remove(i);
             }
         }
+      */
+
         removeTouchedBalls(touchEvents);
 
         /*
@@ -287,23 +357,47 @@ public class GameScreen extends Screen {
         updateBalls();
 
         updateTiles();
-        hb.update();
-        hb2.update();
+    //    hb.update();
+    //    hb2.update();
         bg1.update();
         bg2.update();
         animate();
 
+       /*
         if (robot.getCenterY() > 500) {
             state = GameState.GameOver;
         }
+       */
+
+        if(HP <= 0){
+            state = GameState.GameOver;
+        }
+
+
+
     }
     private void addBalls(int numberOfBallsAdded){
         for(int i=0; i<numberOfBallsAdded; i++){
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random()*20);
-            Ball newBall = new Ball(randX, 0, 35, Color.WHITE);
+            int randkind = (int)(Math.random()*2);
+
+
+            Ball newBall = new Ball(randX, 0);
+
+            if(randkind == 0){
+                newBall.setRadius(47);
+                newBall.setAnimation(sandanim);
+            }else if(randkind == 1){
+                newBall.setRadius(18);
+                newBall.setAnimation(socceranim);
+            }
+
+
+
             newBall.setSpeedX(randSpeedX-10);
             newBall.setSpeedY(0);
+            newBall.setKind(randkind);
             balls.add(newBall);
         }
     }
@@ -314,6 +408,7 @@ public class GameScreen extends Screen {
             Ball ball = balls.get(i);
             if(ball.isVisible() == false){
                 balls.remove(i);
+                HP--;
             }
             else{
                 if(ball.getSpeedY()+gravity<10)
@@ -335,7 +430,7 @@ public class GameScreen extends Screen {
             int len = balls.size();
             for(int i=len-1; i>=0; i--){
                 Ball b = balls.get(i);
-                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius())){
+                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius()+5)){
                     //balls.remove(i);
                     score += 5;
                     b.touchedBounce();
@@ -413,24 +508,29 @@ public class GameScreen extends Screen {
         g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
         paintTiles(g);
 
+    /*
         ArrayList projectiles = robot.getProjectiles();
         for (int i = 0; i < projectiles.size(); i++) {
             Projectile p = (Projectile) projectiles.get(i);
             //g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
             g.drawCircle(p.getX(), p.getY(), 30, Color.WHITE);
         }
+    */
         for(Ball b: balls){
-            b.draw(g);
+          b.draw(g);
+            //g.drawImage(socceranim.getImage(), b.getCenterX(), b.getCenterY());
         }
         // First draw the game elements.
-
+     /*
         g.drawImage(currentSprite, robot.getCenterX() - 61,
                 robot.getCenterY() - 63);
+     */
+      /*
         g.drawImage(hanim.getImage(), hb.getCenterX() - 48,
                 hb.getCenterY() - 48);
         g.drawImage(hanim.getImage(), hb2.getCenterX() - 48,
                 hb2.getCenterY() - 48);
-
+       */
         // Example:
         // g.drawImage(Assets.background, 0, 0);
         // g.drawImage(Assets.character, characterX, characterY);
@@ -458,8 +558,10 @@ public class GameScreen extends Screen {
     }
 
     public void animate() {
-        anim.update(10);
-        hanim.update(50);
+       // anim.update(10);
+       // hanim.update(50);
+        socceranim.update(50);
+        sandanim.update(25);
     }
 
     private void nullify() {
@@ -469,6 +571,7 @@ public class GameScreen extends Screen {
         paint = null;
         bg1 = null;
         bg2 = null;
+      /*
         robot = null;
         hb = null;
         hb2 = null;
@@ -483,7 +586,37 @@ public class GameScreen extends Screen {
         heliboy5 = null;
         anim = null;
         hanim = null;
+    */
+        sandanim = null;
+        socceranim = null;
+        sand = null;
+        sand2 = null;
+        sand3 = null;
+        sand4 = null;
+        sand5 = null;
+        sand6 = null;
+        sand7 = null;
+        sand8 = null;
+        sand9 = null;
+        sand10 = null;
+        sand11 = null;
+        sand12 = null;
+        sand13 = null;
+        sand14 = null;
+        sand15 = null;
+        soccer = null;
+        soccer2 = null;
+        soccer3 = null;
+        soccer4 = null;
+        soccer5 = null;
+        soccer6 = null;
+        soccer7 = null;
+        soccer8 = null;
 
+        for (Ball a : balls) {
+            a = null;
+        }
+        ;
         // Call garbage collector to clean up memory.
         System.gc();
 
@@ -497,7 +630,7 @@ public class GameScreen extends Screen {
 
     }
 
-    private void drawScore() {
+    private void drawScoreHP() {
         Graphics g = game.getGraphics();
 
         Paint paint = new Paint();
@@ -505,18 +638,21 @@ public class GameScreen extends Screen {
         paint.setTextSize(25);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        g.drawString("Score" + score,350,80,paint);
+        g.drawString("Score: " + score, 350, 80, paint);
+        g.drawString("HP: " + HP, 150, 80, paint);
 
     }
 
     private void drawRunningUI() {
         Graphics g = game.getGraphics();
+
+        /*
         g.drawImage(Assets.button, 0, 285, 0, 0, 65, 65);
         g.drawImage(Assets.button, 0, 350, 0, 65, 65, 65);
         g.drawImage(Assets.button, 0, 415, 0, 130, 65, 65);
         g.drawImage(Assets.button, 0, 0, 0, 195, 35, 35);
-
-        drawScore();
+        */
+        drawScoreHP();
 
     }
 
@@ -576,9 +712,11 @@ public class GameScreen extends Screen {
         return bg2;
     }
 
+   /*
     public static Robot getRobot() {
         // TODO Auto-generated method stub
         return robot;
     }
+    */
 
 }
