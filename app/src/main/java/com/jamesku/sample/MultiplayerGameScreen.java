@@ -214,7 +214,12 @@ public class MultiplayerGameScreen extends Screen {
             try {
                 line = reader.readLine();
                 Log.d("READ", "readMessage: " + line);
-                addBallMultiPlayer(line);
+                if(line.equals("I am dead")){
+                    state = GameState.GameOver;
+                    break;
+                }else {
+                    addBallMultiPlayer(line);
+                }
                 // TODO deal with message you received
             } catch (IOException e) {
                 e.printStackTrace();
@@ -432,6 +437,7 @@ public class MultiplayerGameScreen extends Screen {
 
         if(HP <= 0){
             state = GameState.GameOver;
+            writeMessage("I am dead");
         }
 
     }
