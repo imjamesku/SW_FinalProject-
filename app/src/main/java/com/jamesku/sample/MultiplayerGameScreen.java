@@ -15,6 +15,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Vector;
 
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -34,6 +35,8 @@ public class MultiplayerGameScreen extends Screen {
         Ready, Running, Paused, GameOver
     }
 
+    private final Object lock = new Object();
+
     GameState state = GameState.Ready;
 
     // Variable Setup
@@ -41,7 +44,7 @@ public class MultiplayerGameScreen extends Screen {
     private static Background bg1, bg2;
     //private static Robot robot;
     //public static Heliboy hb, hb2;
-    public static ArrayList<Ball> balls = new ArrayList<Ball>();
+    public static Vector<Ball> balls = new Vector<>();
 
     //   private Image currentSprite, character, character2, character3, heliboy,
     //           heliboy2, heliboy3, heliboy4, heliboy5;
@@ -210,6 +213,8 @@ public class MultiplayerGameScreen extends Screen {
             String line = null;
             try {
                 line = reader.readLine();
+                Log.d("READ", "readMessage: " + line);
+                addBallMultiPlayer(line);
                 // TODO deal with message you received
             } catch (IOException e) {
                 e.printStackTrace();
@@ -431,7 +436,7 @@ public class MultiplayerGameScreen extends Screen {
 
     }
 
-    private synchronized void addBalls(int numberOfBallsAdded) {
+    private void addBalls(int numberOfBallsAdded) {
         for (int i = 0; i < numberOfBallsAdded; i++) {
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random() * 20);
@@ -452,28 +457,72 @@ public class MultiplayerGameScreen extends Screen {
             newBall.setSpeedX(randSpeedX - 10);
             newBall.setSpeedY(0);
             newBall.setKind(randkind);
-            balls.add(newBall);
+            synchronized (lock) {
+                balls.add(newBall);
+            }
         }
     }
 
+    private String ballToString(Ball b){
+        StringBuffer rt = new StringBuffer();
+        rt.append(b.getKind());
+        rt.append('_');
+        rt.append(b.getCenterX());
+        rt.append('_');
+        rt.append(b.getSpeedX()*(-1));
+        rt.append('_');
+        rt.append(b.getSpeedY()*(-1));
+        rt.append('_');
+        rt.append(b.getRadius());
+
+        return  rt.toString();
+    }
+
+    private void addBallMultiPlayer(String in){
+        String[] token;
+        token = in.split("_");
+        Ball b = new Ball(Integer.parseInt(token[1]),0);
+        b.setSpeedX(Integer.parseInt(token[2]));
+        b.setSpeedY(Integer.parseInt(token[3]));
+        b.setKind(Integer.parseInt(token[0]));
+        b.setRadius(Integer.parseInt(token[4]));
+
+        if (b.getKind() == 0) {
+            b.setAnimation(sandanim);
+        } else if (b.getKind() == 1) {
+            b.setAnimation(socceranim);
+        }
+
+        synchronized (lock) {
+            balls.add(b);
+        }
+    }
+
+
+
     private void updateBalls(){
-        int len = balls.size();
+        synchronized (lock) {
+            int len = balls.size();
 
-        for(int i = len-1; i>=0; i--){
-            Ball ball = balls.get(i);
-            if(!ball.isVisible()){
-                balls.remove(i);
-                HP--;
-            }
-            else{
-                if(ball.getSpeedY()+gravity<10)
-                    ball.setSpeedY(ball.getSpeedY() + gravity);
-                else
-                    ball.setSpeedY(10);
+            for (int i = len - 1; i >= 0; i--) {
+                Ball ball = balls.get(i);
+                if (!ball.isVisible()) {
+                    balls.remove(i);
+                    HP--;
+                } else {
+                    if (ball.getSpeedY() + gravity < 10)
+                        ball.setSpeedY(ball.getSpeedY() + gravity);
+                    else
+                        ball.setSpeedY(10);
 
-                //ball.update();
+                    //ball.update();
 
-                ball.update();
+                    ball.update();
+                }
+                if(ball.getCenterY()+ball.getRadius() < 0){
+                    writeMessage(ballToString(ball));
+                    balls.remove(i);
+                }
             }
         }
     }
@@ -483,13 +532,12 @@ public class MultiplayerGameScreen extends Screen {
         for (Object o: touchEvents) {
             TouchEvent event = (TouchEvent)o;
             int len = balls.size();
-            for(int i=len-1; i>=0; i--){
+            for(int i = len-1; i>=0; i--){
                 Ball b = balls.get(i);
                 if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius()+5)){
                     //balls.remove(i);
                     score += 5;
                     b.touchedBounce();
-                    writeMessage("I touched a ball!!");
                     break;
                 }
             }
@@ -571,10 +619,11 @@ public class MultiplayerGameScreen extends Screen {
             //g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
             g.drawCircle(p.getX(), p.getY(), 30, Color.WHITE);
         }
-    */
-        for(Ball b: balls){
-            b.draw(g);
-            //g.drawImage(socceranim.getImage(), b.getCenterX(), b.getCenterY());
+    */synchronized (lock) {
+            for (Ball b : balls) {
+                b.draw(g);
+                //g.drawImage(socceranim.getImage(), b.getCenterX(), b.getCenterY());
+            }
         }
         // First draw the game elements.
      /*
