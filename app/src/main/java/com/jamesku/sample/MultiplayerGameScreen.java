@@ -1,5 +1,9 @@
 package com.jamesku.sample;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -25,7 +29,7 @@ import com.jamesku.framework.Input.TouchEvent;
 import com.jamesku.framework.Screen;
 import com.jamesku.framework.implementation.AndroidGame;
 
-public class GameScreen extends Screen {
+public class MultiplayerGameScreen extends Screen {
     enum GameState {
         Ready, Running, Paused, GameOver
     }
@@ -39,9 +43,9 @@ public class GameScreen extends Screen {
     //public static Heliboy hb, hb2;
     public static ArrayList<Ball> balls = new ArrayList<Ball>();
 
- //   private Image currentSprite, character, character2, character3, heliboy,
- //           heliboy2, heliboy3, heliboy4, heliboy5;
- //   private Animation anim, hanim;
+    //   private Image currentSprite, character, character2, character3, heliboy,
+    //           heliboy2, heliboy3, heliboy4, heliboy5;
+    //   private Animation anim, hanim;
 
     private Image soccer,soccer2,soccer3,soccer4,soccer5,soccer6,soccer7,soccer8;
     private Animation socceranim;
@@ -60,11 +64,24 @@ public class GameScreen extends Screen {
     private int score;
     private int HP;
 
+    private Socket socket;
+    private BufferedReader reader;
+    private PrintWriter writer;
+
     ServerSocket serverSocket;
     Socket client;
 
-    public GameScreen(Game game) {
+    public MultiplayerGameScreen(Game game, Socket socket) {
         super(game);
+
+        this.socket = socket;
+        try {
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         gravity = 1;
         addBallFreq = 5;
         addBallCounter = 0;
@@ -162,7 +179,7 @@ public class GameScreen extends Screen {
         sandanim.addFrame(sand15, 50);
 
 
-      //  currentSprite = anim.getImage();
+        //  currentSprite = anim.getImage();
 
         loadMap();
 
@@ -179,20 +196,31 @@ public class GameScreen extends Screen {
         paint2.setAntiAlias(true);
         paint2.setColor(Color.WHITE);
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    serverSocket = new ServerSocket(8991);
-//                    Log.d("SERVER", "run: Start accept");
-//                    client = serverSocket.accept();
-//                    Log.d("CLIENT IP", "run: " + client.getInetAddress().getHostAddress());
-//                    serverSocket.close();
-//                } catch (IOException e) {
-//                    Log.e("SERVER INITIALIZE", "GameScreen: " + e.getMessage());
-//                }
-//            }
-//        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                readMessage();
+            }
+        }).start();
+
+    }
+
+    private void readMessage() {
+        while (!socket.isClosed()) {
+            String line = null;
+            try {
+                line = reader.readLine();
+                // TODO deal with message you received
+            } catch (IOException e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+    }
+
+    private void writeMessage(String message) {
+        writer.println(message);
+        writer.flush();
     }
 
     private void loadMap() {
@@ -326,7 +354,7 @@ public class GameScreen extends Screen {
 
         }
         */
-      //  System.out.println("222 " + touchEvents.size());
+        //  System.out.println("222 " + touchEvents.size());
 
 
         // 2. Check miscellaneous events like death:
@@ -384,9 +412,9 @@ public class GameScreen extends Screen {
 
         updateBalls();
 
-     //   updateTiles();
-    //    hb.update();
-    //    hb2.update();
+//        updateTiles();
+        //    hb.update();
+        //    hb2.update();
         bg1.update();
         bg2.update();
         animate();
@@ -401,40 +429,39 @@ public class GameScreen extends Screen {
             state = GameState.GameOver;
         }
 
-
-
     }
-    private void addBalls(int numberOfBallsAdded){
-        for(int i=0; i<numberOfBallsAdded; i++){
+
+    private synchronized void addBalls(int numberOfBallsAdded) {
+        for (int i = 0; i < numberOfBallsAdded; i++) {
             int randX = (int) (Math.random() * 800);
-            int randSpeedX = (int) (Math.random()*20);
-            int randkind = (int)(Math.random()*2);
+            int randSpeedX = (int) (Math.random() * 20);
+            int randkind = (int) (Math.random() * 2);
 
 
             Ball newBall = new Ball(randX, 0);
 
-            if(randkind == 0){
+            if (randkind == 0) {
                 newBall.setRadius(47);
                 newBall.setAnimation(sandanim);
-            }else if(randkind == 1){
+            } else if (randkind == 1) {
                 newBall.setRadius(18);
                 newBall.setAnimation(socceranim);
             }
 
 
-
-            newBall.setSpeedX(randSpeedX-10);
+            newBall.setSpeedX(randSpeedX - 10);
             newBall.setSpeedY(0);
             newBall.setKind(randkind);
             balls.add(newBall);
         }
     }
+
     private void updateBalls(){
         int len = balls.size();
 
         for(int i = len-1; i>=0; i--){
             Ball ball = balls.get(i);
-            if(ball.isVisible() == false){
+            if(!ball.isVisible()){
                 balls.remove(i);
                 HP--;
             }
@@ -444,7 +471,7 @@ public class GameScreen extends Screen {
                 else
                     ball.setSpeedY(10);
 
-                    //ball.update();
+                //ball.update();
 
                 ball.update();
             }
@@ -452,8 +479,8 @@ public class GameScreen extends Screen {
     }
 
     private void removeTouchedBalls(List touchEvents){
-      //  System.out.println(touchEvents.size());
-        for(Object o: touchEvents){
+        //  System.out.println(touchEvents.size());
+        for (Object o: touchEvents) {
             TouchEvent event = (TouchEvent)o;
             int len = balls.size();
             for(int i=len-1; i>=0; i--){
@@ -462,6 +489,7 @@ public class GameScreen extends Screen {
                     //balls.remove(i);
                     score += 5;
                     b.touchedBounce();
+                    writeMessage("I touched a ball!!");
                     break;
                 }
             }
@@ -545,7 +573,7 @@ public class GameScreen extends Screen {
         }
     */
         for(Ball b: balls){
-          b.draw(g);
+            b.draw(g);
             //g.drawImage(socceranim.getImage(), b.getCenterX(), b.getCenterY());
         }
         // First draw the game elements.
@@ -586,8 +614,8 @@ public class GameScreen extends Screen {
     }
 
     public void animate() {
-       // anim.update(10);
-       // hanim.update(50);
+        // anim.update(10);
+        // hanim.update(50);
         socceranim.update(50);
         sandanim.update(25);
     }

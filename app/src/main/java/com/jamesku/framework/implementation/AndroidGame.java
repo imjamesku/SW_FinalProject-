@@ -11,8 +11,11 @@ import android.graphics.Bitmap.Config;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.text.format.Formatter;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.jamesku.framework.Audio;
 import com.jamesku.framework.FileIO;
@@ -20,6 +23,11 @@ import com.jamesku.framework.Game;
 import com.jamesku.framework.Graphics;
 import com.jamesku.framework.Input;
 import com.jamesku.framework.Screen;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 public abstract class AndroidGame extends Activity implements Game {
     AndroidFastRenderView renderView;
@@ -59,6 +67,10 @@ public abstract class AndroidGame extends Activity implements Game {
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "MyGame");
+
+
+        Toast.makeText(this, "END ONCREATE()", Toast.LENGTH_LONG);
+        Log.d("TEST", "TEST");
     }
 
     @Override
@@ -116,4 +128,5 @@ public abstract class AndroidGame extends Activity implements Game {
 
         return screen;
     }
+
 }

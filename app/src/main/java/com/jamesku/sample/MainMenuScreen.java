@@ -1,6 +1,10 @@
 package com.jamesku.sample;
 
+import android.graphics.Color;
+import android.util.Log;
+
 import java.util.List;
+
 
 import com.jamesku.framework.Game;
 import com.jamesku.framework.Graphics;
@@ -22,8 +26,23 @@ public class MainMenuScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
 
-                if (inBounds(event, 50, 350, 250, 450)) {
+                if (inBounds(event, 50, 350, 250, 100)) {
                     game.setScreen(new GameScreen(game));
+                }
+                if (inBounds(event, 50, 450, 250, 100)) {
+
+                    CreateRoomScreen createRoomScreen = new CreateRoomScreen(game);
+                    game.setScreen(createRoomScreen);
+                    Log.d("111", "update: ");
+                    // YOU WANT createRoomScreen.getSocket();
+
+                }
+                if (inBounds(event, 50, 550, 250, 100)) {
+
+                    JoinRoomScreen joinRoomScreen = new JoinRoomScreen(game);
+                    game.setScreen(joinRoomScreen);
+                    // YOU WANT joinRoomScreen.getSocket();
+                  
                 }
 
             }
@@ -42,7 +61,12 @@ public class MainMenuScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawImage(Assets.menu, 0, 0);
+        g.drawARGB(255,0,0,0);
+        g.drawImage(Assets.splash, 0, 0, 0, 0, 480, 800);
+       // g.drawImage(Assets.menu, 0, 0);
+        g.drawRect(50, 350, 250, 100, Color.BLUE);
+        g.drawRect(50, 450, 250, 100, Color.GRAY);
+        g.drawRect(50, 550, 250, 100, Color.YELLOW);
     }
 
     @Override
