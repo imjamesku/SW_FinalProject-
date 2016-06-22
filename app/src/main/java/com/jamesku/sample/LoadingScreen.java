@@ -114,6 +114,19 @@ public class LoadingScreen extends Screen {
         Assets.enter = g.newImage("enter.png",ImageFormat.ARGB4444);
         Assets.hostip = g.newImage("hostip.png",ImageFormat.ARGB4444);
 
+        Assets.waiting = g.newImage("waiting.png",ImageFormat.ARGB4444);
+        Assets.waiting2 = g.newImage("waiting2.png",ImageFormat.ARGB4444);
+        Assets.waiting3 = g.newImage("waiting3.png",ImageFormat.ARGB4444);
+        Assets.waiting4 = g.newImage("waiting4.png",ImageFormat.ARGB4444);
+        Assets.waiting5 = g.newImage("waiting5.png",ImageFormat.ARGB4444);
+        Assets.waiting6 = g.newImage("waiting6.png",ImageFormat.ARGB4444);
+        Assets.waiting7 = g.newImage("waiting7.png",ImageFormat.ARGB4444);
+        Assets.waiting8 = g.newImage("waiting8.png",ImageFormat.ARGB4444);
+        Assets.waiting9 = g.newImage("waiting9.png",ImageFormat.ARGB4444);
+        Assets.waiting10 = g.newImage("waiting10.png",ImageFormat.ARGB4444);
+        Assets.waiting11 = g.newImage("waiting11.png",ImageFormat.ARGB4444);
+        Assets.waiting12 = g.newImage("waiting12.png",ImageFormat.ARGB4444);
+
 
 
 
