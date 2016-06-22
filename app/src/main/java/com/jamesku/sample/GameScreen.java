@@ -462,11 +462,11 @@ public class GameScreen extends Screen {
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
-        paint.setTextSize(25);
+        paint.setTextSize(30);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         g.drawString("Score: " + score, 350, 80, paint);
-        g.drawString("HP: " + HP, 150, 80, paint);
+        g.drawString("HP: " + HP, 50, 80, paint);
 
     }
 
