@@ -245,7 +245,7 @@ public class MultiplayerGameScreen extends Screen {
             try {
                 line = reader.readLine();
                 Log.d("READ", "readMessage: " + line);
-                if(line.equals("I am dead")){
+                if(line != null && line.equals("I am dead")){
                     state = GameState.GameOver;
                     break;
                 }else {
@@ -375,8 +375,12 @@ public class MultiplayerGameScreen extends Screen {
     }
 
     private void addBallMultiPlayer(String in){
+        if(in == null)
+            return;
         String[] token;
         token = in.split("_");
+        if(token.length != 5)
+            return;
         Ball b = new Ball(Integer.parseInt(token[1]),0);
         b.setSpeedX(Integer.parseInt(token[2]));
         b.setSpeedY(Integer.parseInt(token[3]));
