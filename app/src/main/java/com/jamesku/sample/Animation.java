@@ -27,7 +27,7 @@ public class Animation {
         frames.add(new AnimFrame(image, totalDuration));
     }
 
-    public synchronized void update(long elapsedTime) {
+    public synchronized void update(long elapsedTime,int kind,Ball ball) {
         if (frames.size() > 1) {
             animTime += elapsedTime;
             if (animTime >= totalDuration) {
@@ -36,7 +36,11 @@ public class Animation {
 
             }
 
+            int[] magicballradius = {26,26,27,29,31,32,34,36,37,37,37,37,36,35,34,32,30,28,27,26,25};
             while (animTime > getFrame(currentFrame).endTime) {
+                if(kind == 3){
+                    ball.setRadius(magicballradius[currentFrame]);
+                }
                 currentFrame++;
 
             }

@@ -4,6 +4,7 @@ package com.jamesku.framework;
  * Created by James on 2016/06/19.
  */
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 
 public interface Graphics {
@@ -23,6 +24,8 @@ public interface Graphics {
 
     public void drawImage(Image image, int x, int y, int srcX, int srcY,
                           int srcWidth, int srcHeight);
+    public void drawImage(Image image, int x, int y, int srcX, int srcY,
+                          int srcWidth, int srcHeight, Rect destRect);
 
     public void drawImage(Image Image, int x, int y);
 

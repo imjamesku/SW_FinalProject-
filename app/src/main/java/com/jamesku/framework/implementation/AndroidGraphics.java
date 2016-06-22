@@ -134,6 +134,19 @@ public class AndroidGraphics implements Graphics {
         canvas.drawBitmap(((AndroidImage) Image).bitmap, srcRect, dstRect,
                 null);
     }
+    public void drawImage(Image Image, int x, int y, int srcX, int srcY,
+                          int srcWidth, int srcHeight, Rect destRect) {
+        srcRect.left = srcX;
+        srcRect.top = srcY;
+        srcRect.right = srcX + srcWidth;
+        srcRect.bottom = srcY + srcHeight;
+
+
+
+
+        canvas.drawBitmap(((AndroidImage) Image).bitmap, null, destRect,
+                null);
+    }
 
     @Override
     public void drawImage(Image Image, int x, int y) {
