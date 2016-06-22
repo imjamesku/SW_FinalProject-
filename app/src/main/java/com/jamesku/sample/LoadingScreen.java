@@ -99,6 +99,21 @@ public class LoadingScreen extends Screen {
         Assets.createaroom = g.newImage("createaroom.png",ImageFormat.ARGB4444);
         Assets.joinaroom = g.newImage("joinaroom.png",ImageFormat.ARGB4444);
 
+        Assets.zero = g.newImage("zero.png",ImageFormat.ARGB4444);
+        Assets.one = g.newImage("one.png",ImageFormat.ARGB4444);
+        Assets.two = g.newImage("two.png",ImageFormat.ARGB4444);
+        Assets.three = g.newImage("three.png",ImageFormat.ARGB4444);
+        Assets.four = g.newImage("four.png",ImageFormat.ARGB4444);
+        Assets.five = g.newImage("five.png",ImageFormat.ARGB4444);
+        Assets.six = g.newImage("six.png",ImageFormat.ARGB4444);
+        Assets.seven = g.newImage("seven.png",ImageFormat.ARGB4444);
+        Assets.eight = g.newImage("eight.png",ImageFormat.ARGB4444);
+        Assets.nine = g.newImage("nine.png",ImageFormat.ARGB4444);
+        Assets.dot = g.newImage("dot.png",ImageFormat.ARGB4444);
+        Assets.delete = g.newImage("delete.png",ImageFormat.ARGB4444);
+        Assets.enter = g.newImage("enter.png",ImageFormat.ARGB4444);
+
+
 
 
 

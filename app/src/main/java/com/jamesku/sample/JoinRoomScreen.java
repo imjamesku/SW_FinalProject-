@@ -2,6 +2,7 @@ package com.jamesku.sample;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.Log;
 
 import com.jamesku.framework.Game;
@@ -103,19 +104,43 @@ public class JoinRoomScreen extends Screen{
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
         g.drawString(IP.toString(), 100, 50, paint);
-        g.drawCircle(80, 400, 40, Color.GRAY);
-        g.drawCircle(160, 400, 40, Color.GRAY);
-        g.drawCircle(240, 400, 40, Color.GRAY);
-        g.drawCircle(80, 500, 40, Color.GRAY);
-        g.drawCircle(160, 500, 40, Color.GRAY);
-        g.drawCircle(240, 500, 40, Color.GRAY);
-        g.drawCircle(80, 600, 40, Color.GRAY);
-        g.drawCircle(160, 600, 40, Color.GRAY);
-        g.drawCircle(240, 600, 40, Color.GRAY);
-        g.drawCircle(80, 700, 40, Color.GRAY);
-        g.drawCircle(160, 700, 40, Color.GRAY);
-        g.drawCircle(240, 700, 40, Color.GRAY);
-        g.drawCircle(400, 700, 40, Color.GRAY);
+
+        //g.drawARGB(255, 127, 127, 127);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 320, 120, 440);
+        g.drawImage(Assets.one, 0, 320, 0, 0, 480, 800, dstRect);
+        dstRect.set(120, 320, 240, 440);
+        g.drawImage(Assets.two, 120, 320, 0, 0, 480, 800, dstRect);
+        dstRect.set(240, 320, 360, 440);
+        g.drawImage(Assets.three, 240, 320, 0, 0, 480, 800, dstRect);
+        dstRect.set(360, 320, 480, 440);
+        g.drawImage(Assets.delete, 360, 320, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(0, 440, 120, 560);
+        g.drawImage(Assets.four, 0, 440, 0, 0, 480, 800, dstRect);
+        dstRect.set(120, 440, 240, 560);
+        g.drawImage(Assets.five, 120, 440, 0, 0, 480, 800, dstRect);
+        dstRect.set(240, 440, 360, 560);
+        g.drawImage(Assets.six, 240, 440, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(0, 560, 120, 680);
+        g.drawImage(Assets.seven, 0, 560, 0, 0, 480, 800, dstRect);
+        dstRect.set(120, 560, 240, 680);
+        g.drawImage(Assets.eight, 120, 560, 0, 0, 480, 800, dstRect);
+        dstRect.set(240, 560, 360, 680);
+        g.drawImage(Assets.nine, 240, 560, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(0, 680, 120, 800);
+        g.drawImage(Assets.dot, 0, 680, 0, 0, 480, 800, dstRect);
+        dstRect.set(120, 680, 240, 800);
+        g.drawImage(Assets.zero, 120, 680, 0, 0, 480, 800, dstRect);
+
+
+        dstRect.set(360, 440, 480, 800);
+        g.drawImage(Assets.enter, 360, 440, 0, 0, 480, 800, dstRect);
+
+
+
 
 
     }

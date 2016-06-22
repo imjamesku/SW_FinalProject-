@@ -20,6 +20,7 @@ public class Assets {
     public static Image title;
     public static Image oneplayer,twoplayer;
     public static Image createaroom,joinaroom;
+    public static Image zero,one,two,three,four,five,six,seven,eight,nine,dot,delete,enter;
 
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub
