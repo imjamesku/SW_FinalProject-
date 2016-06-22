@@ -507,14 +507,14 @@ public class MultiplayerGameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
-                if (inBounds(event, 0, 0, 800, 240)) {
+                if (inBounds(event, 0, 200, 480, 200)) {
 
                     if (!inBounds(event, 0, 0, 35, 35)) {
                         resume();
                     }
                 }
 
-                if (inBounds(event, 0, 240, 800, 240)) {
+                if (inBounds(event, 60, 400, 360, 100)) {
                     for(Ball b : balls){
                         b.setVisible(false);
                     }
@@ -656,7 +656,9 @@ public class MultiplayerGameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Tap to Start.", 50, 300, paint);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 350, 480, 450);
+        g.drawImage(Assets.taptostart, 0, 100, 0, 0, 480, 800, dstRect);
 
     }
 
@@ -684,8 +686,12 @@ public class MultiplayerGameScreen extends Screen {
         Graphics g = game.getGraphics();
         // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Resume", 400, 165, paint2);
-        g.drawString("Menu", 400, 360, paint2);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 200, 480, 400);
+        g.drawImage(Assets.resume, 0, 100, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(60, 400, 420, 500);
+        g.drawImage(Assets.Menu, 100, 400, 0, 0, 480, 800, dstRect);
 
     }
 
