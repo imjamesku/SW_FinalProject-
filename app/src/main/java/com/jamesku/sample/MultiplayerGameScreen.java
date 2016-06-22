@@ -462,8 +462,6 @@ public class MultiplayerGameScreen extends Screen {
 
 
         // Example:
-        // g.drawImage(Assets.background, 0, 0);
-        // g.drawImage(Assets.character, characterX, characterY);
 
         // Secondly, draw the UI above the game elements.
         if (state == GameState.Ready)
@@ -570,7 +568,10 @@ public class MultiplayerGameScreen extends Screen {
     private void drawGameOverUI() {
         Graphics g = game.getGraphics();
         g.drawRect(0, 0, 1281, 801, Color.BLACK);
-        g.drawString("GAME OVER.", 400, 240, paint2);
+        if(HP <= 0)
+            g.drawString("GAME OVER.", 400, 240, paint2);
+        else
+            g.drawString("YOU WIN!", 100, 300, paint);
         g.drawString("Tap to return.", 400, 290, paint);
 
     }
