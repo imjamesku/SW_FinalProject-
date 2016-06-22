@@ -130,6 +130,7 @@ public class LoadingScreen extends Screen {
         Assets.gameover = g.newImage("gameover.png",ImageFormat.ARGB4444);
         Assets.taptoreturn = g.newImage("taptoreturn.png", ImageFormat.ARGB4444);
         Assets.youwin = g.newImage("youwin.png",ImageFormat.ARGB4444);
+        Assets.windowsXP = g.newImage("windowsXP.jpg", ImageFormat.ARGB4444);
 
 
 

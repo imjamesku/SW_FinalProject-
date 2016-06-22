@@ -24,7 +24,7 @@ public class Assets {
     public static Image hostip;
     public static Image waiting,waiting2,waiting3,waiting4,waiting5,waiting6,waiting7,waiting8,waiting9,waiting10,waiting11,waiting12;
     public static Image gameover,youwin,taptoreturn;
-
+    public static Image windowsXP;
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub
         theme = sampleGame.getAudio().createMusic("menutheme.mp3");

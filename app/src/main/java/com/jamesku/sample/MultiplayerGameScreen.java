@@ -46,7 +46,7 @@ public class MultiplayerGameScreen extends Screen {
 
     // Variable Setup
 
-    private static Background bg1, bg2;
+
 
     public static Vector<Ball> balls = new Vector<>();
 
@@ -61,6 +61,7 @@ public class MultiplayerGameScreen extends Screen {
 
     private   Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
     private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
+    private Image windowsXP;
     private  Animation magicanim;
     private static int psudoTime;
 
@@ -102,10 +103,6 @@ public class MultiplayerGameScreen extends Screen {
         HP = 10;
 
         // Initialize game objects here
-
-        bg1 = new Background(0, 0);
-        bg2 = new Background(2160, 0);
-
 
         soccer = Assets.soccer;
         soccer2 = Assets.soccer2;
@@ -191,6 +188,7 @@ public class MultiplayerGameScreen extends Screen {
         magic19 = Assets.magic19;
         magic20 = Assets.magic20;
         magic21 = Assets.magic21;
+        windowsXP = Assets.windowsXP;
 
         magicanim = new Animation();
         magicanim.addFrame(magic,200);
@@ -548,9 +546,7 @@ public class MultiplayerGameScreen extends Screen {
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
 
-        g.drawRect(0, 0, 490, 810, Color.BLACK);
-        g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
-        g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
+        g.drawImage(windowsXP, 0, 0, 0, 0, 480, 800);
 
 
     synchronized (lock) {
@@ -591,8 +587,7 @@ public class MultiplayerGameScreen extends Screen {
         // Set all variables to null. You will be recreating them in the
         // constructor.
         paint = null;
-        bg1 = null;
-        bg2 = null;
+
 
         sandanim = null;
         socceranim = null;
@@ -741,15 +736,7 @@ public class MultiplayerGameScreen extends Screen {
 
     }
 
-    public static Background getBg1() {
-        // TODO Auto-generated method stub
-        return bg1;
-    }
 
-    public static Background getBg2() {
-        // TODO Auto-generated method stub
-        return bg2;
-    }
 
     public static int getPsudoTime() {
         return psudoTime;
