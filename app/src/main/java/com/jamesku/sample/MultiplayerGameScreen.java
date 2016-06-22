@@ -98,7 +98,7 @@ public class MultiplayerGameScreen extends Screen {
         addBallFreq = 5;
         addBallCounter = 0;
         score = 0;
-        HP = 100;
+        HP = 10;
 
         // Initialize game objects here
 
