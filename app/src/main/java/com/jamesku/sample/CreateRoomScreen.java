@@ -2,6 +2,7 @@ package com.jamesku.sample;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.Log;
 
 import com.jamesku.framework.Game;
@@ -56,12 +57,16 @@ public class CreateRoomScreen extends Screen {
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
         Paint paint = new Paint();
-        paint.setTextSize(30);
+        paint.setTextSize(50);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
         g.drawARGB(255, 0, 0, 0);
-        g.drawString(NetworkUtilities.getLocalIpAddress(),100,100,paint);
+        g.drawString(NetworkUtilities.getLocalIpAddress(), 240, 300, paint);
+
+        Rect dstRect = new Rect();
+        dstRect.set(0, 0, 480, 200);
+        g.drawImage(Assets.hostip, 0, 0, 0, 0, 480, 800, dstRect);
     }
 
     @Override

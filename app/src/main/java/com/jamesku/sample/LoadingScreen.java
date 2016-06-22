@@ -112,6 +112,7 @@ public class LoadingScreen extends Screen {
         Assets.dot = g.newImage("dot.png",ImageFormat.ARGB4444);
         Assets.delete = g.newImage("delete.png",ImageFormat.ARGB4444);
         Assets.enter = g.newImage("enter.png",ImageFormat.ARGB4444);
+        Assets.hostip = g.newImage("hostip.png",ImageFormat.ARGB4444);
 
 
 
