@@ -55,7 +55,14 @@ public class MultiplayerGameScreen extends Screen {
     private Image sand,sand2,sand3,sand4,sand5,sand6,sand7,sand8,sand9,sand10,sand11,sand12,sand13,sand14,sand15;
     private Animation sandanim;
 
-    private ArrayList tilearray = new ArrayList();
+    private Image cool,cool2,cool3,cool4;
+    private Animation coolanim;
+
+    private   Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
+    private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
+    private  Animation magicanim;
+
+
 
     int livesLeft = 1;
     Paint paint, paint2;
@@ -149,7 +156,61 @@ public class MultiplayerGameScreen extends Screen {
         sandanim.addFrame(sand14,50);
         sandanim.addFrame(sand15, 50);
 
+        cool = Assets.cool;
+        cool2 = Assets.cool2;
+        cool3 = Assets.cool3;
+        cool4 = Assets.cool4;
 
+        coolanim = new Animation();
+        coolanim.addFrame(cool,100);
+        coolanim.addFrame(cool2,100);
+        coolanim.addFrame(cool3,100);
+        coolanim.addFrame(cool4,100);
+
+        magic = Assets.magic;
+        magic2 = Assets.magic2;
+        magic3 = Assets.magic3;
+        magic4 = Assets.magic4;
+        magic5 = Assets.magic5;
+        magic6 = Assets.magic6;
+        magic7 = Assets.magic7;
+        magic8 = Assets.magic8;
+        magic9 = Assets.magic9;
+        magic10 = Assets.magic10;
+        magic11 = Assets.magic11;
+        magic12 = Assets.magic12;
+        magic13 = Assets.magic13;
+        magic14 = Assets.magic14;
+        magic15 = Assets.magic15;
+        magic16 = Assets.magic16;
+        magic17 = Assets.magic17;
+        magic18 = Assets.magic18;
+        magic19 = Assets.magic19;
+        magic20 = Assets.magic20;
+        magic21 = Assets.magic21;
+
+        magicanim = new Animation();
+        magicanim.addFrame(magic,200);
+        magicanim.addFrame(magic2,200);
+        magicanim.addFrame(magic3,200);
+        magicanim.addFrame(magic4,200);
+        magicanim.addFrame(magic5,200);
+        magicanim.addFrame(magic6, 200);
+        magicanim.addFrame(magic7,200);
+        magicanim.addFrame(magic8,200);
+        magicanim.addFrame(magic9,200);
+        magicanim.addFrame(magic10,200);
+        magicanim.addFrame(magic11,200);
+        magicanim.addFrame(magic12,200);
+        magicanim.addFrame(magic13,200);
+        magicanim.addFrame(magic14,200);
+        magicanim.addFrame(magic15, 200);
+        magicanim.addFrame(magic16,200);
+        magicanim.addFrame(magic17,200);
+        magicanim.addFrame(magic18,200);
+        magicanim.addFrame(magic19,200);
+        magicanim.addFrame(magic20,200);
+        magicanim.addFrame(magic21,200);
 
 
 
@@ -265,7 +326,7 @@ public class MultiplayerGameScreen extends Screen {
 
         bg1.update();
         bg2.update();
-        animate();
+
 
 
 
@@ -285,18 +346,31 @@ public class MultiplayerGameScreen extends Screen {
 
             Ball newBall = new Ball(randX, 0);
 
-            if (randkind == 0) {
+            if(randkind == 0){
                 newBall.setRadius(47);
+                newBall.setElapsedTime(50);
                 newBall.setAnimation(sandanim);
-            } else if (randkind == 1) {
+            }else if(randkind == 1){
                 newBall.setRadius(18);
+                newBall.setElapsedTime(25);
                 newBall.setAnimation(socceranim);
+            }else if(randkind == 2){
+                newBall.setRadius(34);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(coolanim);
+            }else  if(randkind == 3){
+                newBall.setRadius(26);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(magicanim);
+
             }
+
 
 
             newBall.setSpeedX(randSpeedX - 10);
             newBall.setSpeedY(0);
             newBall.setKind(randkind);
+
             synchronized (lock) {
                 balls.add(newBall);
             }
@@ -311,7 +385,7 @@ public class MultiplayerGameScreen extends Screen {
         rt.append('_');
         rt.append(b.getSpeedX()*(-1));
         rt.append('_');
-        rt.append(b.getSpeedY()*(-1));
+        rt.append(b.getSpeedY() * (-1));
         rt.append('_');
         rt.append(b.getRadius());
 
@@ -434,14 +508,7 @@ public class MultiplayerGameScreen extends Screen {
 
     }
 
-    private void updateTiles() {
 
-        for (int i = 0; i < tilearray.size(); i++) {
-            Tile t = (Tile) tilearray.get(i);
-            t.update();
-        }
-
-    }
 
     @Override
     public void paint(float deltaTime) {
@@ -518,6 +585,35 @@ public class MultiplayerGameScreen extends Screen {
         soccer6 = null;
         soccer7 = null;
         soccer8 = null;
+
+        coolanim = null;
+        cool = null;
+        cool2 = null;
+        cool3 = null;
+        cool4 = null;
+
+        magicanim = null;
+        magic= null;
+        magic2= null;
+        magic3= null;
+        magic4= null;
+        magic5= null;
+        magic6= null;
+        magic7= null;
+        magic8= null;
+        magic9= null;
+        magic10= null;
+        magic11= null;
+        magic12= null;
+        magic13= null;
+        magic14= null;
+        magic15= null;
+        magic16= null;
+        magic17= null;
+        magic18= null;
+        magic19= null;
+        magic20= null;
+        magic21= null;
 
         for (Ball a : balls) {
             a = null;
