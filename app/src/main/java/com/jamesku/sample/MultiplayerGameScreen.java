@@ -452,11 +452,24 @@ public class MultiplayerGameScreen extends Screen {
             int len = balls.size();
             for(int i = len-1; i>=0; i--){
                 Ball b = balls.get(i);
-                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius()+5)){
-                    //balls.remove(i);
-                    score += 5;
-                    b.touchedBounce();
-                    break;
+                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius()+5) ) {
+                    if (event.type == TouchEvent.TOUCH_DOWN) {
+                        //throw the ball
+                        score += 5;
+                        b.touchedBounce();
+                        break;
+                    }
+                    else if(event.type == TouchEvent.TOUCH_HOLD){
+                        b.setSpeedX(0);
+                        b.setSpeedY(0);
+                        break;
+                    }
+                    else if(event.type == TouchEvent.TOUCH_UP){
+                        b.setSpeedX(0);
+                        b.setSpeedY(-50);
+                        break;
+                    }
+
                 }
             }
         }
