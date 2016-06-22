@@ -416,6 +416,8 @@ public class MultiplayerGameScreen extends Screen {
                 } else {
                     if (ball.getSpeedY() + gravity < 10)
                         ball.setSpeedY(ball.getSpeedY() + gravity);
+                    else
+                        ball.setSpeedY(ball.getSpeedY() * 0.5 + 5);
 
 
                     //ball.update();
