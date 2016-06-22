@@ -545,8 +545,8 @@ public class MultiplayerGameScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-
-        g.drawImage(windowsXP, 0, 0, 0, 0, 480, 800);
+        Rect r = new Rect(0, 0, 480, 800);
+        g.drawImage(windowsXP, 0, 0, 0, 0, 480, 800, r);
 
 
     synchronized (lock) {
