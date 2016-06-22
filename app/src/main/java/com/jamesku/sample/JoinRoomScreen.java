@@ -78,7 +78,7 @@ public class JoinRoomScreen extends Screen{
                         try {
                             socket = new Socket(IP.toString(), 8991);
                             Log.d("INFO", "update: CONNECT TO " + IP.toString());
-                            MultiplayerGameScreen screen = new MultiplayerGameScreen(game, socket);
+                            MultiplayerGameScreen screen = new MultiplayerGameScreen(game, socket, MultiplayerGameScreen.ConnectionType.Client);
                             game.setScreen(screen);
                             Log.d("THREAD", "CONNECT THREAD TERMINATED");
                         } catch (IOException e) {

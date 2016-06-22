@@ -37,7 +37,7 @@ public class CreateRoomScreen extends Screen {
             socket = serverSocket.accept();
             Log.d("INFO", "acceptConnection: NEW CONNECTION ESTABLISHED FROM " + socket.getInetAddress().getHostAddress());
             serverSocket.close();
-            MultiplayerGameScreen screen = new MultiplayerGameScreen(game, socket);
+            MultiplayerGameScreen screen = new MultiplayerGameScreen(game, socket, MultiplayerGameScreen.ConnectionType.Server);
             game.setScreen(screen);
             System.gc();
             Log.d("THREAD", "ACCEPT THREAD TERMINATED");
