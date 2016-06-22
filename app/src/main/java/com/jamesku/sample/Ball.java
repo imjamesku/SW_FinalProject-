@@ -11,6 +11,7 @@ public class Ball extends GameObject {
     private int dropFreq;
     private int kind;
     private Animation animation;
+    private long elapsedTime;
     private boolean visible;
     final private int BOTTOM_BOARDER = 800;
     final private int RIGHT_BOARDER = 480;
@@ -24,6 +25,7 @@ public class Ball extends GameObject {
         setDropFreq(0);
         setKind(0);
         setAnimation(null);
+        setElapsedTime(50);
     }
 
     public void update(){
@@ -48,6 +50,8 @@ public class Ball extends GameObject {
         }else{
             setCenterX(getCenterX() + getSpeedX());
         }
+
+        animation.update(getElapsedTime(),getKind(),this);
 
     }
 
@@ -116,5 +120,13 @@ public class Ball extends GameObject {
     }
     public Animation getAnimation() {
         return animation;
+    }
+
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(long elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 }

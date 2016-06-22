@@ -35,13 +35,10 @@ public class GameScreen extends Screen {
     // Variable Setup
 
     private static Background bg1, bg2;
-    //private static Robot robot;
-    //public static Heliboy hb, hb2;
+
     public static ArrayList<Ball> balls = new ArrayList<Ball>();
 
- //   private Image currentSprite, character, character2, character3, heliboy,
- //           heliboy2, heliboy3, heliboy4, heliboy5;
- //   private Animation anim, hanim;
+
 
     private Image soccer,soccer2,soccer3,soccer4,soccer5,soccer6,soccer7,soccer8;
     private Animation socceranim;
@@ -49,7 +46,12 @@ public class GameScreen extends Screen {
     private Image sand,sand2,sand3,sand4,sand5,sand6,sand7,sand8,sand9,sand10,sand11,sand12,sand13,sand14,sand15;
     private Animation sandanim;
 
-    private ArrayList tilearray = new ArrayList();
+    private Image cool,cool2,cool3,cool4;
+    private Animation coolanim;
+
+    private   Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
+    private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
+    private  Animation magicanim;
 
     int livesLeft = 1;
     Paint paint, paint2;
@@ -75,39 +77,7 @@ public class GameScreen extends Screen {
 
         bg1 = new Background(0, 0);
         bg2 = new Background(2160, 0);
-    /*
-        robot = new Robot();
-        hb = new Heliboy(340, 360);
-        hb2 = new Heliboy(700, 360);
 
-
-
-        character = Assets.character;
-        character2 = Assets.character2;
-        character3 = Assets.character3;
-
-        heliboy = Assets.heliboy;
-        heliboy2 = Assets.heliboy2;
-        heliboy3 = Assets.heliboy3;
-        heliboy4 = Assets.heliboy4;
-        heliboy5 = Assets.heliboy5;
-
-        anim = new Animation();
-        anim.addFrame(character, 1250);
-        anim.addFrame(character2, 50);
-        anim.addFrame(character3, 50);
-        anim.addFrame(character2, 50);
-
-        hanim = new Animation();
-        hanim.addFrame(heliboy, 100);
-        hanim.addFrame(heliboy2, 100);
-        hanim.addFrame(heliboy3, 100);
-        hanim.addFrame(heliboy4, 100);
-        hanim.addFrame(heliboy5, 100);
-        hanim.addFrame(heliboy4, 100);
-        hanim.addFrame(heliboy3, 100);
-        hanim.addFrame(heliboy2, 100);
-    */
 
         soccer = Assets.soccer;
         soccer2 = Assets.soccer2;
@@ -145,26 +115,80 @@ public class GameScreen extends Screen {
         sand15 = Assets.sand15;
 
         sandanim = new Animation();
-        sandanim.addFrame(sand,50);
-        sandanim.addFrame(sand2,50);
-        sandanim.addFrame(sand3,50);
-        sandanim.addFrame(sand4,50);
-        sandanim.addFrame(sand5,50);
-        sandanim.addFrame(sand6,50);
-        sandanim.addFrame(sand7,50);
-        sandanim.addFrame(sand8,50);
-        sandanim.addFrame(sand9,50);
-        sandanim.addFrame(sand10,50);
-        sandanim.addFrame(sand11,50);
-        sandanim.addFrame(sand12,50);
-        sandanim.addFrame(sand13,50);
-        sandanim.addFrame(sand14,50);
-        sandanim.addFrame(sand15, 50);
+        sandanim.addFrame(sand,100);
+        sandanim.addFrame(sand2,100);
+        sandanim.addFrame(sand3,100);
+        sandanim.addFrame(sand4,100);
+        sandanim.addFrame(sand5,100);
+        sandanim.addFrame(sand6,100);
+        sandanim.addFrame(sand7,100);
+        sandanim.addFrame(sand8,100);
+        sandanim.addFrame(sand9,100);
+        sandanim.addFrame(sand10,100);
+        sandanim.addFrame(sand11,100);
+        sandanim.addFrame(sand12,100);
+        sandanim.addFrame(sand13,100);
+        sandanim.addFrame(sand14,100);
+        sandanim.addFrame(sand15, 100);
+
+        cool = Assets.cool;
+        cool2 = Assets.cool2;
+        cool3 = Assets.cool3;
+        cool4 = Assets.cool4;
+
+        coolanim = new Animation();
+        coolanim.addFrame(cool,100);
+        coolanim.addFrame(cool2,100);
+        coolanim.addFrame(cool3,100);
+        coolanim.addFrame(cool4,100);
+
+        magic = Assets.magic;
+        magic2 = Assets.magic2;
+        magic3 = Assets.magic3;
+        magic4 = Assets.magic4;
+        magic5 = Assets.magic5;
+        magic6 = Assets.magic6;
+        magic7 = Assets.magic7;
+        magic8 = Assets.magic8;
+        magic9 = Assets.magic9;
+        magic10 = Assets.magic10;
+        magic11 = Assets.magic11;
+        magic12 = Assets.magic12;
+        magic13 = Assets.magic13;
+        magic14 = Assets.magic14;
+        magic15 = Assets.magic15;
+        magic16 = Assets.magic16;
+        magic17 = Assets.magic17;
+        magic18 = Assets.magic18;
+        magic19 = Assets.magic19;
+        magic20 = Assets.magic20;
+        magic21 = Assets.magic21;
+
+        magicanim = new Animation();
+        magicanim.addFrame(magic,200);
+        magicanim.addFrame(magic2,200);
+        magicanim.addFrame(magic3,200);
+        magicanim.addFrame(magic4,200);
+        magicanim.addFrame(magic5,200);
+        magicanim.addFrame(magic6, 200);
+        magicanim.addFrame(magic7,200);
+        magicanim.addFrame(magic8,200);
+        magicanim.addFrame(magic9,200);
+        magicanim.addFrame(magic10,200);
+        magicanim.addFrame(magic11,200);
+        magicanim.addFrame(magic12,200);
+        magicanim.addFrame(magic13,200);
+        magicanim.addFrame(magic14,200);
+        magicanim.addFrame(magic15, 200);
+        magicanim.addFrame(magic16,200);
+        magicanim.addFrame(magic17,200);
+        magicanim.addFrame(magic18,200);
+        magicanim.addFrame(magic19,200);
+        magicanim.addFrame(magic20,200);
+        magicanim.addFrame(magic21,200);
 
 
-      //  currentSprite = anim.getImage();
 
-        loadMap();
 
         // Defining a paint object
         paint = new Paint();
@@ -179,58 +203,10 @@ public class GameScreen extends Screen {
         paint2.setAntiAlias(true);
         paint2.setColor(Color.WHITE);
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    serverSocket = new ServerSocket(8991);
-//                    Log.d("SERVER", "run: Start accept");
-//                    client = serverSocket.accept();
-//                    Log.d("CLIENT IP", "run: " + client.getInetAddress().getHostAddress());
-//                    serverSocket.close();
-//                } catch (IOException e) {
-//                    Log.e("SERVER INITIALIZE", "GameScreen: " + e.getMessage());
-//                }
-//            }
-//        }).start();
-    }
-
-    private void loadMap() {
-        ArrayList lines = new ArrayList();
-        int width = 0;
-        int height = 0;
-
-        Scanner scanner = new Scanner(SampleGame.map);
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-
-            // no more lines to read
-            if (line == null) {
-                break;
-            }
-
-            if (!line.startsWith("!")) {
-                lines.add(line);
-                width = Math.max(width, line.length());
-
-            }
-        }
-        height = lines.size();
-
-        for (int j = 0; j < 12; j++) {
-            String line = (String) lines.get(j);
-            for (int i = 0; i < width; i++) {
-
-                if (i < line.length()) {
-                    char ch = line.charAt(i);
-                    Tile t = new Tile(i, j, Character.getNumericValue(ch));
-                    tilearray.add(t);
-                }
-
-            }
-        }
 
     }
+
+
 
     @Override
     public void update(float deltaTime) {
@@ -267,114 +243,11 @@ public class GameScreen extends Screen {
         // This is identical to the update() method from our Unit 2/3 game.
 
         // 1. All touch input is handled here:
-  /*
-        int len = touchEvents.size();
-        //System.out.println("111 " + len);
-        for (int i = 0; i < len; i++) {
-            TouchEvent event = (TouchEvent) touchEvents.get(i);
-            if (event.type == TouchEvent.TOUCH_DOWN) {
 
-                if (inBounds(event, 0, 285, 65, 65)) {
-                    robot.jump();
-                    currentSprite = anim.getImage();
-                    robot.setDucked(false);
-                }
-
-                else if (inBounds(event, 0, 350, 65, 65)) {
-
-                    if (robot.isDucked() == false && robot.isJumped() == false
-                            && robot.isReadyToFire()) {
-                        robot.shoot();
-                    }
-                }
-
-                else if (inBounds(event, 0, 415, 65, 65)
-                        && robot.isJumped() == false) {
-                    currentSprite = Assets.characterDown;
-                    robot.setDucked(true);
-                    robot.setSpeedX(0);
-
-                }
-
-                if (event.x > 400) {
-                    // Move right.
-                    robot.moveRight();
-                    robot.setMovingRight(true);
-
-                }
-
-            }
-
-            if (event.type == TouchEvent.TOUCH_UP) {
-
-                if (inBounds(event, 0, 415, 65, 65)) {
-                    currentSprite = anim.getImage();
-                    robot.setDucked(false);
-
-                }
-
-                if (inBounds(event, 0, 0, 35, 35)) {
-                    pause();
-
-                }
-
-                if (event.x > 400) {
-                    // Move right.
-                    robot.stopRight();
-                }
-            }
-
-        }
-        */
-      //  System.out.println("222 " + touchEvents.size());
-
-
-        // 2. Check miscellaneous events like death:
-
-        /*
-        if (livesLeft == 0) {
-            state = GameState.GameOver;
-        }
-*/
-        // 3. Call individual update() methods here.
-        // This is where all the game updates happen.
-        // For example, robot.update();
-
-     /*
-        robot.update();
-        if (robot.isJumped()) {
-            currentSprite = Assets.characterJump;
-        } else if (robot.isJumped() == false && robot.isDucked() == false) {
-            currentSprite = anim.getImage();
-        }
-
-        ArrayList projectiles = robot.getProjectiles();
-        for (int i = 0; i < projectiles.size(); i++) {
-            Projectile p = (Projectile) projectiles.get(i);
-            if (p.isVisible() == true) {
-                p.update();
-            } else {
-                projectiles.remove(i);
-            }
-        }
-      */
 
         removeTouchedBalls(touchEvents);
 
-        /*
-        if(addBallCounter >= addBallFreq) {
-            addBalls(1);
-            addBallCounter = 0;
-        }
-        else
-            addBallCounter++;
-        */
-        /*
-        if(addBallCounter  == 0){
-            addBalls(1);
-            addBallCounter++;
-        }
-        */
+
 
         if(balls.size() == 0)
             addBalls(1);
@@ -384,18 +257,12 @@ public class GameScreen extends Screen {
 
         updateBalls();
 
-     //   updateTiles();
-    //    hb.update();
-    //    hb2.update();
+
         bg1.update();
         bg2.update();
-        animate();
+       // animate();
 
-       /*
-        if (robot.getCenterY() > 500) {
-            state = GameState.GameOver;
-        }
-       */
+
 
         if(HP <= 0){
             state = GameState.GameOver;
@@ -408,17 +275,28 @@ public class GameScreen extends Screen {
         for(int i=0; i<numberOfBallsAdded; i++){
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random()*20);
-            int randkind = (int)(Math.random()*2);
+            int randkind = (int)(Math.random()*4);
 
 
             Ball newBall = new Ball(randX, 0);
 
             if(randkind == 0){
                 newBall.setRadius(47);
+                newBall.setElapsedTime(50);
                 newBall.setAnimation(sandanim);
             }else if(randkind == 1){
                 newBall.setRadius(18);
+                newBall.setElapsedTime(25);
                 newBall.setAnimation(socceranim);
+            }else if(randkind == 2){
+                newBall.setRadius(34);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(coolanim);
+            }else  if(randkind == 3){
+                newBall.setRadius(26);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(magicanim);
+
             }
 
 
@@ -518,14 +396,6 @@ public class GameScreen extends Screen {
 
     }
 
-    private void updateTiles() {
-
-        for (int i = 0; i < tilearray.size(); i++) {
-            Tile t = (Tile) tilearray.get(i);
-            t.update();
-        }
-
-    }
 
     @Override
     public void paint(float deltaTime) {
@@ -534,34 +404,11 @@ public class GameScreen extends Screen {
         g.drawRect(0, 0, 490, 810, Color.BLACK);
         g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
         g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
-        paintTiles(g);
 
-    /*
-        ArrayList projectiles = robot.getProjectiles();
-        for (int i = 0; i < projectiles.size(); i++) {
-            Projectile p = (Projectile) projectiles.get(i);
-            //g.drawRect(p.getX(), p.getY(), 10, 5, Color.YELLOW);
-            g.drawCircle(p.getX(), p.getY(), 30, Color.WHITE);
+
+        for(Ball b : balls){
+            b.draw(g);
         }
-    */
-        for(Ball b: balls){
-          b.draw(g);
-            //g.drawImage(socceranim.getImage(), b.getCenterX(), b.getCenterY());
-        }
-        // First draw the game elements.
-     /*
-        g.drawImage(currentSprite, robot.getCenterX() - 61,
-                robot.getCenterY() - 63);
-     */
-      /*
-        g.drawImage(hanim.getImage(), hb.getCenterX() - 48,
-                hb.getCenterY() - 48);
-        g.drawImage(hanim.getImage(), hb2.getCenterX() - 48,
-                hb2.getCenterY() - 48);
-       */
-        // Example:
-        // g.drawImage(Assets.background, 0, 0);
-        // g.drawImage(Assets.character, characterX, characterY);
 
         // Secondly, draw the UI above the game elements.
         if (state == GameState.Ready)
@@ -576,21 +423,9 @@ public class GameScreen extends Screen {
 
     }
 
-    private void paintTiles(Graphics g) {
-        for (int i = 0; i < tilearray.size(); i++) {
-            Tile t = (Tile) tilearray.get(i);
-            if (t.type != 0) {
-                g.drawImage(t.getTileImage(), t.getTileX(), t.getTileY());
-            }
-        }
-    }
 
-    public void animate() {
-       // anim.update(10);
-       // hanim.update(50);
-        socceranim.update(50);
-        sandanim.update(25);
-    }
+
+
 
     private void nullify() {
 
@@ -599,22 +434,7 @@ public class GameScreen extends Screen {
         paint = null;
         bg1 = null;
         bg2 = null;
-      /*
-        robot = null;
-        hb = null;
-        hb2 = null;
-        currentSprite = null;
-        character = null;
-        character2 = null;
-        character3 = null;
-        heliboy = null;
-        heliboy2 = null;
-        heliboy3 = null;
-        heliboy4 = null;
-        heliboy5 = null;
-        anim = null;
-        hanim = null;
-    */
+
         sandanim = null;
         socceranim = null;
         sand = null;
@@ -640,6 +460,35 @@ public class GameScreen extends Screen {
         soccer6 = null;
         soccer7 = null;
         soccer8 = null;
+        coolanim = null;
+        cool = null;
+        cool2 = null;
+        cool3 = null;
+        cool4 = null;
+
+        magicanim = null;
+        magic= null;
+        magic2= null;
+        magic3= null;
+        magic4= null;
+        magic5= null;
+        magic6= null;
+        magic7= null;
+        magic8= null;
+        magic9= null;
+        magic10= null;
+        magic11= null;
+        magic12= null;
+        magic13= null;
+        magic14= null;
+        magic15= null;
+        magic16= null;
+        magic17= null;
+        magic18= null;
+        magic19= null;
+        magic20= null;
+        magic21= null;
+
 
         for (Ball a : balls) {
             a = null;
@@ -674,12 +523,6 @@ public class GameScreen extends Screen {
     private void drawRunningUI() {
         Graphics g = game.getGraphics();
 
-        /*
-        g.drawImage(Assets.button, 0, 285, 0, 0, 65, 65);
-        g.drawImage(Assets.button, 0, 350, 0, 65, 65, 65);
-        g.drawImage(Assets.button, 0, 415, 0, 130, 65, 65);
-        g.drawImage(Assets.button, 0, 0, 0, 195, 35, 35);
-        */
         drawScoreHP();
 
     }
@@ -740,11 +583,6 @@ public class GameScreen extends Screen {
         return bg2;
     }
 
-   /*
-    public static Robot getRobot() {
-        // TODO Auto-generated method stub
-        return robot;
-    }
-    */
+
 
 }

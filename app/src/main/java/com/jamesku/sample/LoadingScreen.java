@@ -64,6 +64,32 @@ public class LoadingScreen extends Screen {
         Assets.sand14 = g.newImage("sand14.png",ImageFormat.ARGB4444);
         Assets.sand15 = g.newImage("sand15.png",ImageFormat.ARGB4444);
 
+        Assets.cool = g.newImage("cool.png",ImageFormat.ARGB4444);
+        Assets.cool2 = g.newImage("cool2.png",ImageFormat.ARGB4444);
+        Assets.cool3 = g.newImage("cool3.png",ImageFormat.ARGB4444);
+        Assets.cool4 = g.newImage("cool4.png",ImageFormat.ARGB4444);
+
+        Assets.magic = g.newImage("magic.png",ImageFormat.ARGB4444);
+        Assets.magic2 = g.newImage("magic2.png",ImageFormat.ARGB4444);
+        Assets.magic3 = g.newImage("magic3.png",ImageFormat.ARGB4444);
+        Assets.magic4 = g.newImage("magic4.png",ImageFormat.ARGB4444);
+        Assets.magic5 = g.newImage("magic5.png",ImageFormat.ARGB4444);
+        Assets.magic6 = g.newImage("magic6.png",ImageFormat.ARGB4444);
+        Assets.magic7 = g.newImage("magic7.png",ImageFormat.ARGB4444);
+        Assets.magic8 = g.newImage("magic8.png",ImageFormat.ARGB4444);
+        Assets.magic9 = g.newImage("magic9.png",ImageFormat.ARGB4444);
+        Assets.magic10 = g.newImage("magic10.png",ImageFormat.ARGB4444);
+        Assets.magic11 = g.newImage("magic11.png",ImageFormat.ARGB4444);
+        Assets.magic12 = g.newImage("magic12.png",ImageFormat.ARGB4444);
+        Assets.magic13 = g.newImage("magic13.png",ImageFormat.ARGB4444);
+        Assets.magic14 = g.newImage("magic14.png",ImageFormat.ARGB4444);
+        Assets.magic15 = g.newImage("magic15.png",ImageFormat.ARGB4444);
+        Assets.magic16 = g.newImage("magic16.png",ImageFormat.ARGB4444);
+        Assets.magic17 = g.newImage("magic17.png",ImageFormat.ARGB4444);
+        Assets.magic18 = g.newImage("magic18.png",ImageFormat.ARGB4444);
+        Assets.magic19 = g.newImage("magic19.png",ImageFormat.ARGB4444);
+        Assets.magic20 = g.newImage("magic20.png",ImageFormat.ARGB4444);
+        Assets.magic21 = g.newImage("magic21.png",ImageFormat.ARGB4444);
 
 
 

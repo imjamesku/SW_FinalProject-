@@ -481,8 +481,8 @@ public class MultiplayerGameScreen extends Screen {
     public void animate() {
         // anim.update(10);
         // hanim.update(50);
-        socceranim.update(50);
-        sandanim.update(25);
+        //socceranim.update(50);
+        //sandanim.update(25);
     }
 
     private void nullify() {
