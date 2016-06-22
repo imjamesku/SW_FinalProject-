@@ -341,7 +341,7 @@ public class MultiplayerGameScreen extends Screen {
         for (int i = 0; i < numberOfBallsAdded; i++) {
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random() * 20);
-            int randkind = (int) (Math.random() * 2);
+            int randkind = (int) (Math.random() * 4);
 
 
             Ball newBall = new Ball(randX, 0);
