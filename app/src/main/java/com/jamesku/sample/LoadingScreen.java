@@ -131,6 +131,9 @@ public class LoadingScreen extends Screen {
         Assets.taptoreturn = g.newImage("taptoreturn.png", ImageFormat.ARGB4444);
         Assets.youwin = g.newImage("youwin.png",ImageFormat.ARGB4444);
         Assets.windowsXP = g.newImage("windowsXP.jpg", ImageFormat.ARGB4444);
+        Assets.Menu = g.newImage("menumenu.png", ImageFormat.ARGB4444);
+        Assets.resume = g.newImage("resume.png", ImageFormat.ARGB4444);
+        Assets.taptostart = g.newImage("taptostart.png", ImageFormat.ARGB4444);
 
 
 

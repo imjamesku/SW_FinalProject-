@@ -454,7 +454,10 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Tap to Start.", 400, 240, paint);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 200, 480, 400);
+        g.drawImage(Assets.taptostart, 0, 100, 0, 0, 480, 800, dstRect);
+
 
     }
 
@@ -482,8 +485,13 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
         // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Resume", 400, 165, paint2);
-        g.drawString("Menu", 400, 360, paint2);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 200, 480, 400);
+        g.drawImage(Assets.resume, 0, 100, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(0, 400, 480, 500);
+        g.drawImage(Assets.Menu, 100, 400, 0, 0, 480, 800, dstRect);
+
 
     }
 
