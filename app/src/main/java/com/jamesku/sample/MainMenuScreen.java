@@ -27,23 +27,11 @@ public class MainMenuScreen extends Screen {
             TouchEvent event = touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
 
-                if (inBounds(event, 50, 350, 250, 100)) {
+                if (inBounds(event, 40, 400, 400, 170)) {
                     game.setScreen(new GameScreen(game));
                 }
-                if (inBounds(event, 50, 450, 250, 100)) {
-
-                    CreateRoomScreen createRoomScreen = new CreateRoomScreen(game);
-                    game.setScreen(createRoomScreen);
-                    Log.d("111", "update: ");
-                    // YOU WANT createRoomScreen.getSocket();
-
-                }
-                if (inBounds(event, 50, 550, 250, 100)) {
-
-                    JoinRoomScreen joinRoomScreen = new JoinRoomScreen(game);
-                    game.setScreen(joinRoomScreen);
-                    // YOU WANT joinRoomScreen.getSocket();
-                  
+                if (inBounds(event, 40, 600, 400, 200)) {
+                    game.setScreen(new TwoPlayerScreen(game));
                 }
 
             }
@@ -65,13 +53,14 @@ public class MainMenuScreen extends Screen {
         g.drawARGB(255, 255, 255, 255);
         Rect dstRect = new Rect();
         dstRect.set(0, 0, 480, 400);
-        g.drawImage(Assets.title, 0, 0, 0, 0, 480, 800, dstRect);
+        g.drawImage(Assets.title, 0, 20, 0, 0, 480, 800, dstRect);
+        dstRect.set(40, 400, 440, 570);
+        g.drawImage(Assets.oneplayer, 40, 400, 0, 0, 480, 800, dstRect);
+        dstRect.set(40, 600, 440, 800);
+        g.drawImage(Assets.twoplayer, 40, 600, 0, 0, 480, 800, dstRect);
 
 
 
-        g.drawRect(50, 350, 250, 100, Color.BLUE);
-        g.drawRect(50, 450, 250, 100, Color.GRAY);
-        g.drawRect(50, 550, 250, 100, Color.YELLOW);
     }
 
     @Override

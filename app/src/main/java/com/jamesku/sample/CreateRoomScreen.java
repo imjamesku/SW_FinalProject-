@@ -86,7 +86,7 @@ public class CreateRoomScreen extends Screen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new TwoPlayerScreen(game));
         System.gc();
     }
 

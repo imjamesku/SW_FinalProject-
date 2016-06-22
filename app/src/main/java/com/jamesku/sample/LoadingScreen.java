@@ -94,6 +94,10 @@ public class LoadingScreen extends Screen {
         Assets.magic21 = g.newImage("magic21.png",ImageFormat.ARGB4444);
 
         Assets.title = g.newImage("Title_new.png",ImageFormat.ARGB4444);
+        Assets.oneplayer = g.newImage("oneplayer.png",ImageFormat.ARGB4444);
+        Assets.twoplayer = g.newImage("twoplayer.png",ImageFormat.ARGB4444);
+        Assets.createaroom = g.newImage("createaroom.png",ImageFormat.ARGB4444);
+        Assets.joinaroom = g.newImage("joinaroom.png",ImageFormat.ARGB4444);
 
 
 

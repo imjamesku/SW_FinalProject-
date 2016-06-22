@@ -137,7 +137,7 @@ public class JoinRoomScreen extends Screen{
 
     @Override
     public void backButton() {
-        game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new TwoPlayerScreen(game));
         System.gc();
     }
 
