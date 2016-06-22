@@ -17,6 +17,7 @@ public class Assets {
     public static Image cool,cool2,cool3,cool4;
     public static Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
     public static Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
+    public static Image title;
 
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub

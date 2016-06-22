@@ -30,6 +30,8 @@ public class SampleGame extends AndroidGame {
 
         return new SplashLoadingScreen(this);
 
+
+
     }
 
     @Override
