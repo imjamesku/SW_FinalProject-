@@ -61,6 +61,7 @@ public class MultiplayerGameScreen extends Screen {
     private   Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
     private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
     private  Animation magicanim;
+    private static int psudoTime;
 
 
 
@@ -91,6 +92,7 @@ public class MultiplayerGameScreen extends Screen {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        psudoTime = 0;
 
         gravity = 1;
         addBallFreq = 5;
@@ -266,6 +268,7 @@ public class MultiplayerGameScreen extends Screen {
 
     @Override
     public void update(float deltaTime) {
+        psudoTime++;
         List touchEvents = game.getInput().getTouchEvents();
 
         // We have four separate update methods in this example.
@@ -296,39 +299,18 @@ public class MultiplayerGameScreen extends Screen {
 
     private void updateRunning(List touchEvents, float deltaTime) {
 
-        // This is identical to the update() method from our Unit 2/3 game.
-
-        // 1. All touch input is handled here:
-
-
-
-        // 2. Check miscellaneous events like death:
-
 
         // 3. Call individual update() methods here.
         // This is where all the game updates happen.
-        // For example, robot.update();
-
-
 
         removeTouchedBalls(touchEvents);
-
-
 
         if(balls.size() == 0 && connectionType == ConnectionType.Server)
             addBalls(1);
         else if(balls.size()<10 && (score/50 > balls.size()-1) && connectionType == ConnectionType.Server){
             addBalls(1);
         }
-
         updateBalls();
-
-
-        bg1.update();
-        bg2.update();
-
-
-
 
         if(HP <= 0){
             state = GameState.GameOver;
@@ -453,26 +435,38 @@ public class MultiplayerGameScreen extends Screen {
             for(int i = len-1; i>=0; i--){
                 Ball b = balls.get(i);
                 if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius()+5) ) {
+
+
+                    b.setLastTouchTime(psudoTime);
+
                     if (event.type == TouchEvent.TOUCH_DOWN) {
                         //throw the ball
-                        score += 5;
-                        b.touchedBounce();
-                        break;
-                    }
-                    else if(event.type == TouchEvent.TOUCH_HOLD){
-                        b.setSpeedX(0);
-                        b.setSpeedY(0);
+                       // score += 5;
+                       // b.touchedBounce();
+                        b.setHoldTime(1);
                         break;
                     }
                     else if(event.type == TouchEvent.TOUCH_UP){
-                        b.setSpeedX(0);
-                        b.setSpeedY(-50);
+                        if(b.getHoldTime() == 1){
+                            b.touchedBounce();
+                            score += 5;
+                        }
+                        else{
+                            int ranX = (int)(Math.random() * b.getHoldTime()) - b.getHoldTime()/2;
+                           b.setSpeedX(ranX);
+                           b.setSpeedY(-b.getHoldTime()*2);
+                            score += 10;
+                        }
+
+
+                        b.setHoldTime(0);
                         break;
                     }
 
                 }
             }
         }
+
     }
 
     private boolean inBounds(TouchEvent event, int x, int y, int width,
@@ -484,9 +478,17 @@ public class MultiplayerGameScreen extends Screen {
             return false;
     }
     private boolean inCircle(TouchEvent event, int x, int y, int radius){
+        Log.d("circlex="+x, "inCircle: ");
+        Log.d("circley="+y, "inCircle: ");
+        Log.d("x="+event.x, "inCircle: ");
+        Log.d("y="+event.y, "inCircle: ");
         int distance2 = (event.x - x) * (event.x - x) + (event.y - y) * (event.y - y);
-        if(distance2 < radius*radius)
+        if(distance2 < radius*radius) {
+            Log.d("INININ", "inCircle: ");
             return true;
+
+        }
+        Log.d("OUTOUTOUT", "inCircle: ");
         return false;
     }
 
@@ -503,6 +505,9 @@ public class MultiplayerGameScreen extends Screen {
                 }
 
                 if (inBounds(event, 0, 240, 800, 240)) {
+                    for(Ball b : balls){
+                        b.setVisible(false);
+                    }
                     nullify();
                     goToMenu();
                 }
@@ -632,9 +637,8 @@ public class MultiplayerGameScreen extends Screen {
         magic20= null;
         magic21= null;
 
-        for (Ball a : balls) {
-            a = null;
-        }
+
+        balls = null;
         ;
         // Call garbage collector to clean up memory.
         System.gc();
@@ -728,11 +732,7 @@ public class MultiplayerGameScreen extends Screen {
         return bg2;
     }
 
-   /*
-    public static Robot getRobot() {
-        // TODO Auto-generated method stub
-        return robot;
+    public static int getPsudoTime() {
+        return psudoTime;
     }
-    */
-
 }
