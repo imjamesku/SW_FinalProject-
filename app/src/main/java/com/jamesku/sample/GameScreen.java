@@ -367,14 +367,14 @@ public class GameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
-                if (inBounds(event, 0, 0, 800, 240)) {
+                if (inBounds(event, 0, 200, 480, 200)) {
 
                     if (!inBounds(event, 0, 0, 35, 35)) {
                         resume();
                     }
                 }
 
-                if (inBounds(event, 0, 240, 800, 240)) {
+                if (inBounds(event, 60, 400, 360, 100)) {
                     for(Ball b: balls){
                         b.setVisible(false);
                     }
@@ -455,7 +455,7 @@ public class GameScreen extends Screen {
 
         g.drawARGB(155, 0, 0, 0);
         Rect dstRect = new Rect();
-        dstRect.set(0, 200, 480, 400);
+        dstRect.set(0, 350, 480, 450);
         g.drawImage(Assets.taptostart, 0, 100, 0, 0, 480, 800, dstRect);
 
 
@@ -489,7 +489,7 @@ public class GameScreen extends Screen {
         dstRect.set(0, 200, 480, 400);
         g.drawImage(Assets.resume, 0, 100, 0, 0, 480, 800, dstRect);
 
-        dstRect.set(0, 400, 480, 500);
+        dstRect.set(60, 400, 420, 500);
         g.drawImage(Assets.Menu, 100, 400, 0, 0, 480, 800, dstRect);
 
 
