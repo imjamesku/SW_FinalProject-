@@ -244,7 +244,7 @@ public class MultiplayerGameScreen extends Screen {
             String line = null;
             try {
                 line = reader.readLine();
-                Log.d("READ", "readMessage: " + line);
+                //Log.d("READ", "readMessage: " + line);
                 if(line != null && line.equals("I am dead")){
                     state = GameState.GameOver;
                     break;
