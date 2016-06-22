@@ -127,6 +127,10 @@ public class LoadingScreen extends Screen {
         Assets.waiting11 = g.newImage("waiting11.png",ImageFormat.ARGB4444);
         Assets.waiting12 = g.newImage("waiting12.png",ImageFormat.ARGB4444);
 
+        Assets.gameover = g.newImage("gameover.png",ImageFormat.ARGB4444);
+        Assets.taptoreturn = g.newImage("taptoreturn.png", ImageFormat.ARGB4444);
+        Assets.youwin = g.newImage("youwin.png",ImageFormat.ARGB4444);
+
 
 
 

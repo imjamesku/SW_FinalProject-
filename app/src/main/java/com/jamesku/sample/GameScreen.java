@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.widget.Toast;
@@ -71,7 +72,7 @@ public class GameScreen extends Screen {
         addBallFreq = 5;
         addBallCounter = 0;
         score = 0;
-        HP = 100;
+        HP = 10;
 
         // Initialize game objects here
 
@@ -441,10 +442,8 @@ public class GameScreen extends Screen {
 
 
 
-        for (Ball a : balls) {
-            a = null;
-        }
-        balls = null;
+
+        balls.clear();
 
         // Call garbage collector to clean up memory.
         System.gc();
@@ -490,9 +489,16 @@ public class GameScreen extends Screen {
 
     private void drawGameOverUI() {
         Graphics g = game.getGraphics();
+
         g.drawRect(0, 0, 1281, 801, Color.BLACK);
-        g.drawString("GAME OVER.", 400, 240, paint2);
-        g.drawString("Tap to return.", 400, 290, paint);
+
+        Rect dstRect = new Rect();
+        dstRect.set(0, 200, 480, 400);
+        g.drawImage(Assets.gameover, 0, 100, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(100, 400, 340, 500);
+        g.drawImage(Assets.taptoreturn, 100, 400, 0, 0, 480, 800, dstRect);
+
 
     }
 

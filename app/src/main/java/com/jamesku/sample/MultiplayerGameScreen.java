@@ -19,6 +19,7 @@ import java.util.Vector;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.widget.Toast;
@@ -487,10 +488,10 @@ public class MultiplayerGameScreen extends Screen {
             return false;
     }
     private boolean inCircle(TouchEvent event, int x, int y, int radius){
-        Log.d("circlex="+x, "inCircle: ");
-        Log.d("circley="+y, "inCircle: ");
-        Log.d("x="+event.x, "inCircle: ");
-        Log.d("y="+event.y, "inCircle: ");
+        Log.d("circlex=" + x, "inCircle: ");
+        Log.d("circley=" + y, "inCircle: ");
+        Log.d("x=" + event.x, "inCircle: ");
+        Log.d("y=" + event.y, "inCircle: ");
         int distance2 = (event.x - x) * (event.x - x) + (event.y - y) * (event.y - y);
         if(distance2 < radius*radius) {
             Log.d("INININ", "inCircle: ");
@@ -694,12 +695,19 @@ public class MultiplayerGameScreen extends Screen {
     private void drawGameOverUI() {
         Graphics g = game.getGraphics();
         g.drawRect(0, 0, 1281, 801, Color.BLACK);
-        if(HP <= 0)
-            g.drawString("GAME OVER.", 400, 240, paint2);
-        else
-            g.drawString("YOU WIN!", 100, 300, paint);
-        g.drawString("Tap to return.", 400, 290, paint);
+        Rect dstRect = new Rect();
+      
+        if(HP <= 0) {
+            dstRect.set(0, 200, 480, 400);
+            g.drawImage(Assets.gameover, 0, 100, 0, 0, 480, 800, dstRect);
 
+        }else {
+            dstRect.set(0, 200, 480, 400);
+            g.drawImage(Assets.youwin, 0, 100, 0, 0, 480, 800, dstRect);
+        }
+
+        dstRect.set(100, 400, 340, 500);
+        g.drawImage(Assets.taptoreturn, 100, 400, 0, 0, 480, 800, dstRect);
     }
 
     @Override

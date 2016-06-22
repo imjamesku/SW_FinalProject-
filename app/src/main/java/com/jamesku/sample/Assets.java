@@ -23,6 +23,7 @@ public class Assets {
     public static Image zero,one,two,three,four,five,six,seven,eight,nine,dot,delete,enter;
     public static Image hostip;
     public static Image waiting,waiting2,waiting3,waiting4,waiting5,waiting6,waiting7,waiting8,waiting9,waiting10,waiting11,waiting12;
+    public static Image gameover,youwin,taptoreturn;
 
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub
