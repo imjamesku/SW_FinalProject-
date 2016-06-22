@@ -1,5 +1,7 @@
 package com.jamesku.sample;
 
+import android.graphics.Rect;
+
 import com.jamesku.framework.Game;
 import com.jamesku.framework.Graphics;
 import com.jamesku.framework.Graphics.ImageFormat;
@@ -91,6 +93,9 @@ public class LoadingScreen extends Screen {
         Assets.magic20 = g.newImage("magic20.png",ImageFormat.ARGB4444);
         Assets.magic21 = g.newImage("magic21.png",ImageFormat.ARGB4444);
 
+        Assets.title = g.newImage("Title_new.png",ImageFormat.ARGB4444);
+
+
 
 
         //This is how you would load a sound if you had one.
@@ -104,7 +109,13 @@ public class LoadingScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawImage(Assets.splash, 0, 0);
+        g.drawARGB(255, 255, 255, 255);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 0, 480, 800);
+        g.drawImage(Assets.splash, 0, 0, 0, 0, 480, 800, dstRect);
+
+
+
     }
 
     @Override

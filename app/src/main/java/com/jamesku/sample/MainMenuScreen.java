@@ -1,6 +1,7 @@
 package com.jamesku.sample;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.util.Log;
 
 import java.util.List;
@@ -61,9 +62,13 @@ public class MainMenuScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-        g.drawARGB(255,0,0,0);
-        g.drawImage(Assets.splash, 0, 0, 0, 0, 480, 800);
-       // g.drawImage(Assets.menu, 0, 0);
+        g.drawARGB(255, 255, 255, 255);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 0, 480, 400);
+        g.drawImage(Assets.title, 0, 0, 0, 0, 480, 800, dstRect);
+
+
+
         g.drawRect(50, 350, 250, 100, Color.BLUE);
         g.drawRect(50, 450, 250, 100, Color.GRAY);
         g.drawRect(50, 550, 250, 100, Color.YELLOW);
