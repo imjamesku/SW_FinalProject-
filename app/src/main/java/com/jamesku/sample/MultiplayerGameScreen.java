@@ -454,7 +454,11 @@ public class MultiplayerGameScreen extends Screen {
                         else{
                             int ranX = (int)(Math.random() * b.getHoldTime()) - b.getHoldTime()/2;
                            b.setSpeedX(ranX);
-                           b.setSpeedY(-b.getHoldTime()*2);
+                            if(-b.getHoldTime()*2 > -50 ){
+                                b.setSpeedY(-50);
+                            }
+                            else
+                                b.setSpeedY(-b.getHoldTime()*2);
                             score += 10;
                         }
 
@@ -638,7 +642,7 @@ public class MultiplayerGameScreen extends Screen {
         magic21= null;
 
 
-        balls = null;
+        balls.clear();
         ;
         // Call garbage collector to clean up memory.
         System.gc();

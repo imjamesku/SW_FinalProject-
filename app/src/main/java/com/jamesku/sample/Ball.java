@@ -52,8 +52,7 @@ public class Ball extends GameObject {
         }
 
             if(getHoldTime() == 0 || notBeenTouchedTime >= 40) {
-                System.out.println("holdTime = " + holdTime);
-                System.out.println("notBeenToucgedTime = " + notBeenTouchedTime);
+
                 setCenterX(getCenterX() + getSpeedX());
                 setCenterY(getCenterY() + getSpeedY());
                 setHoldTime(0);
