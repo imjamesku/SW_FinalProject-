@@ -75,6 +75,7 @@ public class JoinRoomScreen extends Screen{
                     } else if (inBounds(event, 360, 320, 120, 120)) {
                         if (IP.length() != 0)
                             IP.deleteCharAt(IP.length() - 1);
+                        break;
                     } else if (inBounds(event, 360, 440, 120, 360)) {
                         try {
                             socket = new Socket(IP.toString(), 8991);
@@ -85,6 +86,7 @@ public class JoinRoomScreen extends Screen{
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        break;
                     }
             }
         }
