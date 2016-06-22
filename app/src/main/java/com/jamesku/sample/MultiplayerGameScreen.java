@@ -405,6 +405,10 @@ public class MultiplayerGameScreen extends Screen {
             b.setAnimation(sandanim);
         } else if (b.getKind() == 1) {
             b.setAnimation(socceranim);
+        } else if(b.getKind() == 2){
+            b.setAnimation(coolanim);
+        } else if(b.getKind() == 3){
+            b.setAnimation(magicanim);
         }
 
         synchronized (lock) {
