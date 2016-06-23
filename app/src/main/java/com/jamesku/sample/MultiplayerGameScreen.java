@@ -19,6 +19,7 @@ import java.util.Vector;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class MultiplayerGameScreen extends Screen {
 
     // Variable Setup
 
-    private static Background bg1, bg2;
+
 
     public static Vector<Ball> balls = new Vector<>();
 
@@ -60,7 +61,9 @@ public class MultiplayerGameScreen extends Screen {
 
     private   Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
     private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
+    private Image windowsXP;
     private  Animation magicanim;
+    private static int psudoTime;
 
 
 
@@ -91,18 +94,15 @@ public class MultiplayerGameScreen extends Screen {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        psudoTime = 0;
 
         gravity = 1;
         addBallFreq = 5;
         addBallCounter = 0;
         score = 0;
-        HP = 100;
+        HP = 10;
 
         // Initialize game objects here
-
-        bg1 = new Background(0, 0);
-        bg2 = new Background(2160, 0);
-
 
         soccer = Assets.soccer;
         soccer2 = Assets.soccer2;
@@ -188,6 +188,7 @@ public class MultiplayerGameScreen extends Screen {
         magic19 = Assets.magic19;
         magic20 = Assets.magic20;
         magic21 = Assets.magic21;
+        windowsXP = Assets.windowsXP;
 
         magicanim = new Animation();
         magicanim.addFrame(magic,200);
@@ -242,8 +243,8 @@ public class MultiplayerGameScreen extends Screen {
             String line = null;
             try {
                 line = reader.readLine();
-                Log.d("READ", "readMessage: " + line);
-                if(line.equals("I am dead")){
+                //Log.d("READ", "readMessage: " + line);
+                if(line != null && line.equals("I am dead")){
                     state = GameState.GameOver;
                     break;
                 }else {
@@ -266,6 +267,7 @@ public class MultiplayerGameScreen extends Screen {
 
     @Override
     public void update(float deltaTime) {
+        psudoTime++;
         List touchEvents = game.getInput().getTouchEvents();
 
         // We have four separate update methods in this example.
@@ -296,39 +298,18 @@ public class MultiplayerGameScreen extends Screen {
 
     private void updateRunning(List touchEvents, float deltaTime) {
 
-        // This is identical to the update() method from our Unit 2/3 game.
-
-        // 1. All touch input is handled here:
-
-
-
-        // 2. Check miscellaneous events like death:
-
 
         // 3. Call individual update() methods here.
         // This is where all the game updates happen.
-        // For example, robot.update();
-
-
 
         removeTouchedBalls(touchEvents);
-
-
 
         if(balls.size() == 0 && connectionType == ConnectionType.Server)
             addBalls(1);
         else if(balls.size()<10 && (score/50 > balls.size()-1) && connectionType == ConnectionType.Server){
             addBalls(1);
         }
-
         updateBalls();
-
-
-        bg1.update();
-        bg2.update();
-
-
-
 
         if(HP <= 0){
             state = GameState.GameOver;
@@ -393,8 +374,12 @@ public class MultiplayerGameScreen extends Screen {
     }
 
     private void addBallMultiPlayer(String in){
+        if(in == null)
+            return;
         String[] token;
         token = in.split("_");
+        if(token.length != 5)
+            return;
         Ball b = new Ball(Integer.parseInt(token[1]),0);
         b.setSpeedX(Integer.parseInt(token[2]));
         b.setSpeedY(Integer.parseInt(token[3]));
@@ -430,8 +415,11 @@ public class MultiplayerGameScreen extends Screen {
                 } else {
                     if (ball.getSpeedY() + gravity < 10)
                         ball.setSpeedY(ball.getSpeedY() + gravity);
+                    else if(ball.getSpeedY() > 15)
+                        ball.setSpeedY((int)(ball.getSpeedY() * 0.7) + 5);
                     else
                         ball.setSpeedY(10);
+
 
                     //ball.update();
 
@@ -452,14 +440,43 @@ public class MultiplayerGameScreen extends Screen {
             int len = balls.size();
             for(int i = len-1; i>=0; i--){
                 Ball b = balls.get(i);
-                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius()+5)){
-                    //balls.remove(i);
-                    score += 5;
-                    b.touchedBounce();
-                    break;
+                if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius()+5) ) {
+
+
+                    b.setLastTouchTime(psudoTime);
+
+                    if (event.type == TouchEvent.TOUCH_DOWN) {
+                        //throw the ball
+                       // score += 5;
+                       // b.touchedBounce();
+                        b.setHoldTime(1);
+                        break;
+                    }
+                    else if(event.type == TouchEvent.TOUCH_UP){
+                        if(b.getHoldTime() == 1){
+                            b.touchedBounce();
+                            score += 5;
+                        }
+                        else{
+                            int ranX = (int)(Math.random() * b.getHoldTime()) - b.getHoldTime()/2;
+                           b.setSpeedX(ranX);
+                            if(-b.getHoldTime()*2 > -50 ){
+                                b.setSpeedY(-50);
+                            }
+                            else
+                                b.setSpeedY(-b.getHoldTime()*2);
+                            score += 10;
+                        }
+
+
+                        b.setHoldTime(0);
+                        break;
+                    }
+
                 }
             }
         }
+
     }
 
     private boolean inBounds(TouchEvent event, int x, int y, int width,
@@ -471,9 +488,17 @@ public class MultiplayerGameScreen extends Screen {
             return false;
     }
     private boolean inCircle(TouchEvent event, int x, int y, int radius){
+        Log.d("circlex=" + x, "inCircle: ");
+        Log.d("circley=" + y, "inCircle: ");
+        Log.d("x=" + event.x, "inCircle: ");
+        Log.d("y=" + event.y, "inCircle: ");
         int distance2 = (event.x - x) * (event.x - x) + (event.y - y) * (event.y - y);
-        if(distance2 < radius*radius)
+        if(distance2 < radius*radius) {
+            Log.d("INININ", "inCircle: ");
             return true;
+
+        }
+        Log.d("OUTOUTOUT", "inCircle: ");
         return false;
     }
 
@@ -482,14 +507,17 @@ public class MultiplayerGameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
-                if (inBounds(event, 0, 0, 800, 240)) {
+                if (inBounds(event, 0, 200, 480, 200)) {
 
                     if (!inBounds(event, 0, 0, 35, 35)) {
                         resume();
                     }
                 }
 
-                if (inBounds(event, 0, 240, 800, 240)) {
+                if (inBounds(event, 60, 400, 360, 100)) {
+                    for(Ball b : balls){
+                        b.setVisible(false);
+                    }
                     nullify();
                     goToMenu();
                 }
@@ -517,10 +545,8 @@ public class MultiplayerGameScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
-
-        g.drawRect(0, 0, 490, 810, Color.BLACK);
-        g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
-        g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
+        Rect r = new Rect(0, 0, 480, 800);
+        g.drawImage(windowsXP, 0, 0, 0, 0, 480, 800, r);
 
 
     synchronized (lock) {
@@ -561,8 +587,7 @@ public class MultiplayerGameScreen extends Screen {
         // Set all variables to null. You will be recreating them in the
         // constructor.
         paint = null;
-        bg1 = null;
-        bg2 = null;
+
 
         sandanim = null;
         socceranim = null;
@@ -619,9 +644,8 @@ public class MultiplayerGameScreen extends Screen {
         magic20= null;
         magic21= null;
 
-        for (Ball a : balls) {
-            a = null;
-        }
+
+        balls.clear();
         ;
         // Call garbage collector to clean up memory.
         System.gc();
@@ -632,7 +656,9 @@ public class MultiplayerGameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Tap to Start.", 50, 300, paint);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 350, 480, 450);
+        g.drawImage(Assets.taptostart, 0, 100, 0, 0, 480, 800, dstRect);
 
     }
 
@@ -660,20 +686,31 @@ public class MultiplayerGameScreen extends Screen {
         Graphics g = game.getGraphics();
         // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Resume", 400, 165, paint2);
-        g.drawString("Menu", 400, 360, paint2);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 200, 480, 400);
+        g.drawImage(Assets.resume, 0, 100, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(60, 400, 420, 500);
+        g.drawImage(Assets.Menu, 100, 400, 0, 0, 480, 800, dstRect);
 
     }
 
     private void drawGameOverUI() {
         Graphics g = game.getGraphics();
         g.drawRect(0, 0, 1281, 801, Color.BLACK);
-        if(HP <= 0)
-            g.drawString("GAME OVER.", 400, 240, paint2);
-        else
-            g.drawString("YOU WIN!", 100, 300, paint);
-        g.drawString("Tap to return.", 400, 290, paint);
+        Rect dstRect = new Rect();
+      
+        if(HP <= 0) {
+            dstRect.set(0, 200, 480, 400);
+            g.drawImage(Assets.gameover, 0, 100, 0, 0, 480, 800, dstRect);
 
+        }else {
+            dstRect.set(0, 200, 480, 400);
+            g.drawImage(Assets.youwin, 0, 100, 0, 0, 480, 800, dstRect);
+        }
+
+        dstRect.set(100, 400, 340, 500);
+        g.drawImage(Assets.taptoreturn, 100, 400, 0, 0, 480, 800, dstRect);
     }
 
     @Override
@@ -705,21 +742,9 @@ public class MultiplayerGameScreen extends Screen {
 
     }
 
-    public static Background getBg1() {
-        // TODO Auto-generated method stub
-        return bg1;
-    }
 
-    public static Background getBg2() {
-        // TODO Auto-generated method stub
-        return bg2;
-    }
 
-   /*
-    public static Robot getRobot() {
-        // TODO Auto-generated method stub
-        return robot;
+    public static int getPsudoTime() {
+        return psudoTime;
     }
-    */
-
 }

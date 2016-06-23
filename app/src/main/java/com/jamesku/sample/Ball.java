@@ -13,6 +13,11 @@ public class Ball extends GameObject {
     private Animation animation;
     private long elapsedTime;
     private boolean visible;
+    private int holdTime;
+    private long lastTouchTime;
+
+
+
     final private int BOTTOM_BOARDER = 800;
     final private int RIGHT_BOARDER = 480;
 
@@ -26,30 +31,38 @@ public class Ball extends GameObject {
         setKind(0);
         setAnimation(null);
         setElapsedTime(50);
+        setHoldTime(0);
+        setLastTouchTime(0);
     }
 
     public void update(){
+        long notBeenTouchedTime = MultiplayerGameScreen.getPsudoTime() - getLastTouchTime();
         if(getCenterY() + getSpeedY() - getRadius() >= BOTTOM_BOARDER) {
             setVisible(false);
             return;
         }
-        else{
-            setCenterY(getCenterY() + getSpeedY());
-        }
+
         if(getCenterX() + getSpeedX() + getRadius() >= RIGHT_BOARDER){
             bounce();
             setCenterX(RIGHT_BOARDER - getRadius());
         }
-        else{
-            setCenterX(getCenterX() + getSpeedX());
-        }
-
-        if(getCenterX() + getSpeedX() - getRadius() <= 0){
+        else if(getCenterX() + getSpeedX() - getRadius() <= 0){
             bounce();
             setCenterX(getRadius());
-        }else{
-            setCenterX(getCenterX() + getSpeedX());
         }
+
+            if(getHoldTime() == 0 || notBeenTouchedTime >= 40) {
+
+                setCenterX(getCenterX() + getSpeedX());
+                setCenterY(getCenterY() + getSpeedY());
+                setHoldTime(0);
+            }
+            else if(getHoldTime() > 0){
+                setHoldTime(getHoldTime() + 1);
+            }
+
+
+
 
         animation.update(getElapsedTime(),getKind(),this);
 
@@ -128,5 +141,21 @@ public class Ball extends GameObject {
 
     public void setElapsedTime(long elapsedTime) {
         this.elapsedTime = elapsedTime;
+    }
+
+    public int getHoldTime() {
+        return holdTime;
+    }
+
+    public void setHoldTime(int holdTime) {
+        this.holdTime = holdTime;
+    }
+
+    public long getLastTouchTime() {
+        return lastTouchTime;
+    }
+
+    public void setLastTouchTime(long lastTouchTime) {
+        this.lastTouchTime = lastTouchTime;
     }
 }

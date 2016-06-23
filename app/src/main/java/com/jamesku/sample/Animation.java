@@ -47,6 +47,23 @@ public class Animation {
         }
     }
 
+    public  void updatewaiting(long elapsedTime) {
+        if (frames.size() > 1) {
+            animTime += elapsedTime;
+            if (animTime >= totalDuration) {
+                animTime = animTime % totalDuration;
+                currentFrame = 0;
+
+            }
+
+
+            while (animTime > getFrame(currentFrame).endTime) {
+                currentFrame++;
+
+            }
+        }
+    }
+
     public synchronized Image getImage() {
         if (frames.size() == 0) {
             return null;

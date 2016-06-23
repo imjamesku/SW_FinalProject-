@@ -94,6 +94,47 @@ public class LoadingScreen extends Screen {
         Assets.magic21 = g.newImage("magic21.png",ImageFormat.ARGB4444);
 
         Assets.title = g.newImage("Title_new.png",ImageFormat.ARGB4444);
+        Assets.oneplayer = g.newImage("oneplayer.png",ImageFormat.ARGB4444);
+        Assets.twoplayer = g.newImage("twoplayer.png",ImageFormat.ARGB4444);
+        Assets.createaroom = g.newImage("createaroom.png",ImageFormat.ARGB4444);
+        Assets.joinaroom = g.newImage("joinaroom.png",ImageFormat.ARGB4444);
+
+        Assets.zero = g.newImage("zero.png",ImageFormat.ARGB4444);
+        Assets.one = g.newImage("one.png",ImageFormat.ARGB4444);
+        Assets.two = g.newImage("two.png",ImageFormat.ARGB4444);
+        Assets.three = g.newImage("three.png",ImageFormat.ARGB4444);
+        Assets.four = g.newImage("four.png",ImageFormat.ARGB4444);
+        Assets.five = g.newImage("five.png",ImageFormat.ARGB4444);
+        Assets.six = g.newImage("six.png",ImageFormat.ARGB4444);
+        Assets.seven = g.newImage("seven.png",ImageFormat.ARGB4444);
+        Assets.eight = g.newImage("eight.png",ImageFormat.ARGB4444);
+        Assets.nine = g.newImage("nine.png",ImageFormat.ARGB4444);
+        Assets.dot = g.newImage("dot.png",ImageFormat.ARGB4444);
+        Assets.delete = g.newImage("delete.png",ImageFormat.ARGB4444);
+        Assets.enter = g.newImage("enter.png",ImageFormat.ARGB4444);
+        Assets.hostip = g.newImage("hostip.png",ImageFormat.ARGB4444);
+
+        Assets.waiting = g.newImage("waiting.png",ImageFormat.ARGB4444);
+        Assets.waiting2 = g.newImage("waiting2.png",ImageFormat.ARGB4444);
+        Assets.waiting3 = g.newImage("waiting3.png",ImageFormat.ARGB4444);
+        Assets.waiting4 = g.newImage("waiting4.png",ImageFormat.ARGB4444);
+        Assets.waiting5 = g.newImage("waiting5.png",ImageFormat.ARGB4444);
+        Assets.waiting6 = g.newImage("waiting6.png",ImageFormat.ARGB4444);
+        Assets.waiting7 = g.newImage("waiting7.png",ImageFormat.ARGB4444);
+        Assets.waiting8 = g.newImage("waiting8.png",ImageFormat.ARGB4444);
+        Assets.waiting9 = g.newImage("waiting9.png",ImageFormat.ARGB4444);
+        Assets.waiting10 = g.newImage("waiting10.png",ImageFormat.ARGB4444);
+        Assets.waiting11 = g.newImage("waiting11.png",ImageFormat.ARGB4444);
+        Assets.waiting12 = g.newImage("waiting12.png",ImageFormat.ARGB4444);
+
+        Assets.gameover = g.newImage("gameover.png",ImageFormat.ARGB4444);
+        Assets.taptoreturn = g.newImage("taptoreturn.png", ImageFormat.ARGB4444);
+        Assets.youwin = g.newImage("youwin.png",ImageFormat.ARGB4444);
+        Assets.windowsXP = g.newImage("windowsXP.jpg", ImageFormat.ARGB4444);
+        Assets.Menu = g.newImage("menumenu.png", ImageFormat.ARGB4444);
+        Assets.resume = g.newImage("resume.png", ImageFormat.ARGB4444);
+        Assets.taptostart = g.newImage("taptostart.png", ImageFormat.ARGB4444);
+
 
 
 

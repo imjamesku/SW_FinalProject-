@@ -18,6 +18,14 @@ public class Assets {
     public static Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
     public static Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
     public static Image title;
+    public static Image oneplayer,twoplayer;
+    public static Image createaroom,joinaroom;
+    public static Image zero,one,two,three,four,five,six,seven,eight,nine,dot,delete,enter;
+    public static Image hostip;
+    public static Image waiting,waiting2,waiting3,waiting4,waiting5,waiting6,waiting7,waiting8,waiting9,waiting10,waiting11,waiting12;
+    public static Image gameover,youwin,taptoreturn;
+    public static Image windowsXP;
+    public static Image Menu,resume,taptostart;
 
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub

@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ public class GameScreen extends Screen {
 
     // Variable Setup
 
-    private static Background bg1, bg2;
+
 
     public static ArrayList<Ball> balls = new ArrayList<Ball>();
 
@@ -52,6 +53,7 @@ public class GameScreen extends Screen {
     private   Image magic,magic2,magic3,magic4,magic5,magic6,magic7,magic8,magic9,magic10,magic11,magic12,magic13;
     private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
     private  Animation magicanim;
+    private Image windowsXP;
 
     int livesLeft = 1;
     Paint paint, paint2;
@@ -71,12 +73,10 @@ public class GameScreen extends Screen {
         addBallFreq = 5;
         addBallCounter = 0;
         score = 0;
-        HP = 100;
+        HP = 10;
 
         // Initialize game objects here
 
-        bg1 = new Background(0, 0);
-        bg2 = new Background(2160, 0);
 
 
         soccer = Assets.soccer;
@@ -187,6 +187,7 @@ public class GameScreen extends Screen {
         magicanim.addFrame(magic20,200);
         magicanim.addFrame(magic21,200);
 
+        windowsXP = Assets.windowsXP;
 
 
 
@@ -258,9 +259,7 @@ public class GameScreen extends Screen {
         updateBalls();
 
 
-        bg1.update();
-        bg2.update();
-       // animate();
+
 
 
 
@@ -366,14 +365,17 @@ public class GameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = (TouchEvent) touchEvents.get(i);
             if (event.type == TouchEvent.TOUCH_UP) {
-                if (inBounds(event, 0, 0, 800, 240)) {
+                if (inBounds(event, 0, 200, 480, 200)) {
 
                     if (!inBounds(event, 0, 0, 35, 35)) {
                         resume();
                     }
                 }
 
-                if (inBounds(event, 0, 240, 800, 240)) {
+                if (inBounds(event, 60, 400, 360, 100)) {
+                    for(Ball b: balls){
+                        b.setVisible(false);
+                    }
                     nullify();
                     goToMenu();
                 }
@@ -400,10 +402,9 @@ public class GameScreen extends Screen {
     @Override
     public void paint(float deltaTime) {
         Graphics g = game.getGraphics();
+        Rect r = new Rect(0, 0, 480, 800);
+        g.drawImage(windowsXP, 0, 0, 0, 0, 480, 800, r);
 
-        g.drawRect(0, 0, 490, 810, Color.BLACK);
-        g.drawImage(Assets.background, bg1.getBgX(), bg1.getBgY());
-        g.drawImage(Assets.background, bg2.getBgX(), bg2.getBgY());
 
 
         for(Ball b : balls){
@@ -431,69 +432,15 @@ public class GameScreen extends Screen {
 
         // Set all variables to null. You will be recreating them in the
         // constructor.
-        paint = null;
-        bg1 = null;
-        bg2 = null;
-
-        sandanim = null;
-        socceranim = null;
-        sand = null;
-        sand2 = null;
-        sand3 = null;
-        sand4 = null;
-        sand5 = null;
-        sand6 = null;
-        sand7 = null;
-        sand8 = null;
-        sand9 = null;
-        sand10 = null;
-        sand11 = null;
-        sand12 = null;
-        sand13 = null;
-        sand14 = null;
-        sand15 = null;
-        soccer = null;
-        soccer2 = null;
-        soccer3 = null;
-        soccer4 = null;
-        soccer5 = null;
-        soccer6 = null;
-        soccer7 = null;
-        soccer8 = null;
-        coolanim = null;
-        cool = null;
-        cool2 = null;
-        cool3 = null;
-        cool4 = null;
-
-        magicanim = null;
-        magic= null;
-        magic2= null;
-        magic3= null;
-        magic4= null;
-        magic5= null;
-        magic6= null;
-        magic7= null;
-        magic8= null;
-        magic9= null;
-        magic10= null;
-        magic11= null;
-        magic12= null;
-        magic13= null;
-        magic14= null;
-        magic15= null;
-        magic16= null;
-        magic17= null;
-        magic18= null;
-        magic19= null;
-        magic20= null;
-        magic21= null;
 
 
-        for (Ball a : balls) {
-            a = null;
-        }
-        ;
+
+
+
+
+
+        balls.clear();
+
         // Call garbage collector to clean up memory.
         System.gc();
 
@@ -503,7 +450,10 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Tap to Start.", 400, 240, paint);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 350, 480, 450);
+        g.drawImage(Assets.taptostart, 0, 100, 0, 0, 480, 800, dstRect);
+
 
     }
 
@@ -512,11 +462,11 @@ public class GameScreen extends Screen {
 
         Paint paint = new Paint();
         paint.setColor(Color.BLACK);
-        paint.setTextSize(25);
+        paint.setTextSize(30);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         g.drawString("Score: " + score, 350, 80, paint);
-        g.drawString("HP: " + HP, 150, 80, paint);
+        g.drawString("HP: " + HP, 50, 80, paint);
 
     }
 
@@ -531,16 +481,28 @@ public class GameScreen extends Screen {
         Graphics g = game.getGraphics();
         // Darken the entire screen so you can display the Paused screen.
         g.drawARGB(155, 0, 0, 0);
-        g.drawString("Resume", 400, 165, paint2);
-        g.drawString("Menu", 400, 360, paint2);
+        Rect dstRect = new Rect();
+        dstRect.set(0, 200, 480, 400);
+        g.drawImage(Assets.resume, 0, 100, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(60, 400, 420, 500);
+        g.drawImage(Assets.Menu, 100, 400, 0, 0, 480, 800, dstRect);
+
 
     }
 
     private void drawGameOverUI() {
         Graphics g = game.getGraphics();
+
         g.drawRect(0, 0, 1281, 801, Color.BLACK);
-        g.drawString("GAME OVER.", 400, 240, paint2);
-        g.drawString("Tap to return.", 400, 290, paint);
+
+        Rect dstRect = new Rect();
+        dstRect.set(0, 200, 480, 400);
+        g.drawImage(Assets.gameover, 0, 100, 0, 0, 480, 800, dstRect);
+
+        dstRect.set(100, 400, 340, 500);
+        g.drawImage(Assets.taptoreturn, 100, 400, 0, 0, 480, 800, dstRect);
+
 
     }
 
@@ -573,15 +535,7 @@ public class GameScreen extends Screen {
 
     }
 
-    public static Background getBg1() {
-        // TODO Auto-generated method stub
-        return bg1;
-    }
 
-    public static Background getBg2() {
-        // TODO Auto-generated method stub
-        return bg2;
-    }
 
 
 
