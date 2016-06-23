@@ -75,6 +75,7 @@ public class MultiplayerGameScreen extends Screen {
     private int addBallCounter;
     private int score;
     private int HP;
+    final private int MAX_HP = 15;
 
     private Socket socket;
     private BufferedReader reader;
@@ -100,7 +101,7 @@ public class MultiplayerGameScreen extends Screen {
         addBallFreq = 5;
         addBallCounter = 0;
         score = 0;
-        HP = 10;
+        HP = MAX_HP;
 
         // Initialize game objects here
 
@@ -666,13 +667,15 @@ public class MultiplayerGameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
+        paint.setColor(0xFFFF99CC);
         paint.setTextSize(25);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        g.drawString("Score: " + score, 350, 80, paint);
-        g.drawRect(150, 80, HP*7, 7, Color.GREEN );
-        g.drawString("HP: " + HP, 150, 80, paint);
+        g.drawString("Score: " + score, 350, 58, paint);
+        g.drawString("HP: ", 25, 58, paint);
+        g.drawRect(70, 35, HP*200/MAX_HP+10, 30, 0xFFE2F5A7);
+        g.drawRect(75, 40, HP*200/MAX_HP, 20, 0xFF85E61D );
+     //   g.drawString("HP: " + HP, 150, 80, paint);
     }
 
     private void drawRunningUI() {
