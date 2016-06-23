@@ -475,6 +475,10 @@ public class MultiplayerGameScreen extends Screen {
                     }
 
                 }
+                else if(inCircle(event, b.getCenterX(), b.getCenterY(), b.getRadius() + 10) &&
+                        (event.type == TouchEvent.TOUCH_DRAGGED || event.type == TouchEvent.TOUCH_HOLD)){
+                    b.setHoldTime(0);
+                }
             }
         }
 
