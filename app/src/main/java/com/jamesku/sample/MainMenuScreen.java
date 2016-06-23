@@ -15,6 +15,7 @@ import com.jamesku.framework.Input.TouchEvent;
 public class MainMenuScreen extends Screen {
     public MainMenuScreen(Game game) {
         super(game);
+        Assets.theme.seekBegin();
     }
 
     @Override
