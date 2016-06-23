@@ -671,7 +671,7 @@ public class MultiplayerGameScreen extends Screen {
         Graphics g = game.getGraphics();
 
         Paint paint = new Paint();
-        paint.setColor(0xFFFF99CC);
+        paint.setColor(0xFFB30059);
         paint.setTextSize(25);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
@@ -722,15 +722,19 @@ public class MultiplayerGameScreen extends Screen {
 
     @Override
     public void pause() {
-        if (state == GameState.Running)
+        if (state == GameState.Running) {
             state = GameState.Paused;
+            Assets.theme.pause();
+        }
 
     }
 
     @Override
     public void resume() {
-        if (state == GameState.Paused)
+        if (state == GameState.Paused) {
             state = GameState.Running;
+            Assets.theme.play();
+        }
     }
 
     @Override
