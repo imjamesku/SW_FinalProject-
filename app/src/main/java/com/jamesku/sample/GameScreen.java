@@ -54,6 +54,11 @@ public class GameScreen extends Screen {
     private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
     private  Animation magicanim;
     private Image windowsXP;
+    private Image basketball,basketball2,basketball3,basketball4,basketball5,basketball6,basketball7,basketball8,basketball9,basketball10;
+    private Image basketball11,basketball12,basketball13,basketball14,basketball15;
+    private Animation basketballanim;
+    private Image soc,soc3,soc4,soc5,soc6,soc7,soc8,soc9,soc10;
+    private Animation socanim;
 
     int livesLeft = 1;
     Paint paint, paint2;
@@ -189,6 +194,59 @@ public class GameScreen extends Screen {
 
         windowsXP = Assets.windowsXP;
 
+        basketball = Assets.basketball;
+        basketball2 = Assets.basketball2;
+        basketball3 = Assets.basketball3;
+        basketball4 = Assets.basketball4;
+        basketball5 = Assets.basketball5;
+        basketball6 = Assets.basketball6;
+        basketball7 = Assets.basketball7;
+        basketball8 = Assets.basketball8;
+        basketball9 = Assets.basketball9;
+        basketball10 = Assets.basketball10;
+        basketball11 = Assets.basketball11;
+        basketball12 = Assets.basketball12;
+        basketball13 = Assets.basketball13;
+        basketball14 = Assets.basketball14;
+        basketball15 = Assets.basketball15;
+
+        basketballanim = new Animation();
+        basketballanim.addFrame(basketball,100);
+        basketballanim.addFrame(basketball2,100);
+        basketballanim.addFrame(basketball3,100);
+        basketballanim.addFrame(basketball4,100);
+        basketballanim.addFrame(basketball5,100);
+        basketballanim.addFrame(basketball6,100);
+        basketballanim.addFrame(basketball7,100);
+        basketballanim.addFrame(basketball8,100);
+        basketballanim.addFrame(basketball9,100);
+        basketballanim.addFrame(basketball10,100);
+        basketballanim.addFrame(basketball11,100);
+        basketballanim.addFrame(basketball12,100);
+        basketballanim.addFrame(basketball13,100);
+        basketballanim.addFrame(basketball14,100);
+        basketballanim.addFrame(basketball15,100);
+
+        soc= Assets.soc;
+        soc3= Assets.soc3;
+        soc4= Assets.soc4;
+        soc5= Assets.soc5;
+        soc6= Assets.soc6;
+        soc7= Assets.soc7;
+        soc8= Assets.soc8;
+        soc9= Assets.soc9;
+        soc10= Assets.soc10;
+
+        socanim = new Animation();
+        socanim.addFrame(soc,100);
+        socanim.addFrame(soc3,100);
+        socanim.addFrame(soc4,100);
+        socanim.addFrame(soc5,100);
+        socanim.addFrame(soc6,100);
+        socanim.addFrame(soc7,100);
+        socanim.addFrame(soc8,100);
+        socanim.addFrame(soc9,100);
+        socanim.addFrame(soc10,100);
 
 
         // Defining a paint object
@@ -274,8 +332,8 @@ public class GameScreen extends Screen {
         for(int i=0; i<numberOfBallsAdded; i++){
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random()*20);
-            int randkind = (int)(Math.random()*4);
-
+            int randkind = (int)(Math.random()*6);
+          
 
             Ball newBall = new Ball(randX, 0);
 
@@ -295,7 +353,14 @@ public class GameScreen extends Screen {
                 newBall.setRadius(26);
                 newBall.setElapsedTime(50);
                 newBall.setAnimation(magicanim);
-
+            }else  if(randkind == 4){
+                newBall.setRadius(32);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(basketballanim);
+            }else  if(randkind == 5){
+                newBall.setRadius(37);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(socanim);
             }
 
 

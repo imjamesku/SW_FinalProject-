@@ -135,6 +135,33 @@ public class LoadingScreen extends Screen {
         Assets.resume = g.newImage("resume.png", ImageFormat.ARGB4444);
         Assets.taptostart = g.newImage("taptostart.png", ImageFormat.ARGB4444);
 
+        Assets.basketball = g.newImage("basketball.png", ImageFormat.ARGB4444);
+        Assets.basketball2 = g.newImage("basketball2.png", ImageFormat.ARGB4444);
+        Assets.basketball3 = g.newImage("basketball3.png", ImageFormat.ARGB4444);
+        Assets.basketball4 = g.newImage("basketball4.png", ImageFormat.ARGB4444);
+        Assets.basketball5 = g.newImage("basketball5.png", ImageFormat.ARGB4444);
+        Assets.basketball6 = g.newImage("basketball6.png", ImageFormat.ARGB4444);
+        Assets.basketball7 = g.newImage("basketball7.png", ImageFormat.ARGB4444);
+        Assets.basketball8 = g.newImage("basketball8.png", ImageFormat.ARGB4444);
+        Assets.basketball9 = g.newImage("basketball9.png", ImageFormat.ARGB4444);
+        Assets.basketball10 = g.newImage("basketball10.png", ImageFormat.ARGB4444);
+        Assets.basketball11 = g.newImage("basketball11.png", ImageFormat.ARGB4444);
+        Assets.basketball12 = g.newImage("basketball12.png", ImageFormat.ARGB4444);
+        Assets.basketball13 = g.newImage("basketball13.png", ImageFormat.ARGB4444);
+        Assets.basketball14 = g.newImage("basketball14.png", ImageFormat.ARGB4444);
+        Assets.basketball15 = g.newImage("basketball15.png", ImageFormat.ARGB4444);
+
+        Assets.soc = g.newImage("soc.png",ImageFormat.ARGB4444);
+        Assets.soc3 = g.newImage("soc3.png",ImageFormat.ARGB4444);
+        Assets.soc4 = g.newImage("soc4.png",ImageFormat.ARGB4444);
+        Assets.soc5 = g.newImage("soc5.png",ImageFormat.ARGB4444);
+        Assets.soc6 = g.newImage("soc6.png",ImageFormat.ARGB4444);
+        Assets.soc7 = g.newImage("soc7.png",ImageFormat.ARGB4444);
+        Assets.soc8 = g.newImage("soc8.png",ImageFormat.ARGB4444);
+        Assets.soc9 = g.newImage("soc9.png",ImageFormat.ARGB4444);
+        Assets.soc10 = g.newImage("soc10.png",ImageFormat.ARGB4444);
+
+
 
 
 

@@ -26,6 +26,10 @@ public class Assets {
     public static Image gameover,youwin,taptoreturn;
     public static Image windowsXP;
     public static Image Menu,resume,taptostart;
+    public static Image basketball,basketball2,basketball3,basketball4,basketball5,basketball6,basketball7,basketball8,basketball9,basketball10;
+    public static Image basketball11,basketball12,basketball13,basketball14,basketball15;
+    public static Image soc,soc3,soc4,soc5,soc6,soc7,soc8,soc9,soc10;
+
 
     public static void load(SampleGame sampleGame) {
         // TODO Auto-generated method stub
