@@ -671,8 +671,8 @@ public class MultiplayerGameScreen extends Screen {
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
         g.drawString("Score: " + score, 350, 80, paint);
+        g.drawRect(150, 80, HP*7, 7, Color.GREEN );
         g.drawString("HP: " + HP, 150, 80, paint);
-
     }
 
     private void drawRunningUI() {
