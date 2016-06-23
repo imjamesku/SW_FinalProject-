@@ -63,6 +63,18 @@ public class MultiplayerGameScreen extends Screen {
     private   Image magic14,magic15,magic16,magic17,magic18,magic19,magic20,magic21;
     private Image windowsXP;
     private  Animation magicanim;
+
+    private Image basketball,basketball2,basketball3,basketball4,basketball5,basketball6,basketball7,basketball8,basketball9,basketball10;
+    private Image basketball11,basketball12,basketball13,basketball14,basketball15;
+    private Animation basketballanim;
+    private Image soc,soc3,soc4,soc5,soc6,soc7,soc8,soc9,soc10;
+    private Animation socanim;
+    private Image pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6,pokemon7,pokemon8,pokemon9,pokemon10;
+    private Image pokemon11,pokemon12,pokemon13,pokemon14,pokemon15,pokemon16,pokemon17,pokemon18,pokemon19,pokemon20;
+    private Image pokemon21,pokemon22,pokemon23,pokemon24,pokemon25,pokemon26,pokemon27,pokemon28,pokemon29,pokemon30;
+    private Animation pokenmonanim;
+
+
     private static int psudoTime;
 
 
@@ -214,6 +226,124 @@ public class MultiplayerGameScreen extends Screen {
         magicanim.addFrame(magic20,200);
         magicanim.addFrame(magic21,200);
 
+        basketball = Assets.basketball;
+        basketball2 = Assets.basketball2;
+        basketball3 = Assets.basketball3;
+        basketball4 = Assets.basketball4;
+        basketball5 = Assets.basketball5;
+        basketball6 = Assets.basketball6;
+        basketball7 = Assets.basketball7;
+        basketball8 = Assets.basketball8;
+        basketball9 = Assets.basketball9;
+        basketball10 = Assets.basketball10;
+        basketball11 = Assets.basketball11;
+        basketball12 = Assets.basketball12;
+        basketball13 = Assets.basketball13;
+        basketball14 = Assets.basketball14;
+        basketball15 = Assets.basketball15;
+
+        basketballanim = new Animation();
+        basketballanim.addFrame(basketball,100);
+        basketballanim.addFrame(basketball2,100);
+        basketballanim.addFrame(basketball3,100);
+        basketballanim.addFrame(basketball4,100);
+        basketballanim.addFrame(basketball5,100);
+        basketballanim.addFrame(basketball6,100);
+        basketballanim.addFrame(basketball7,100);
+        basketballanim.addFrame(basketball8,100);
+        basketballanim.addFrame(basketball9,100);
+        basketballanim.addFrame(basketball10,100);
+        basketballanim.addFrame(basketball11,100);
+        basketballanim.addFrame(basketball12,100);
+        basketballanim.addFrame(basketball13,100);
+        basketballanim.addFrame(basketball14,100);
+        basketballanim.addFrame(basketball15,100);
+
+        soc= Assets.soc;
+        soc3= Assets.soc3;
+        soc4= Assets.soc4;
+        soc5= Assets.soc5;
+        soc6= Assets.soc6;
+        soc7= Assets.soc7;
+        soc8= Assets.soc8;
+        soc9= Assets.soc9;
+        soc10= Assets.soc10;
+
+        socanim = new Animation();
+        socanim.addFrame(soc,100);
+        socanim.addFrame(soc3,100);
+        socanim.addFrame(soc4,100);
+        socanim.addFrame(soc5,100);
+        socanim.addFrame(soc6,100);
+        socanim.addFrame(soc7,100);
+        socanim.addFrame(soc8,100);
+        socanim.addFrame(soc9,100);
+        socanim.addFrame(soc10,100);
+
+        pokemon1 = Assets.pokemon1;
+        pokemon2 = Assets.pokemon2;
+        pokemon3 = Assets.pokemon3;
+        pokemon4 = Assets.pokemon4;
+        pokemon5 = Assets.pokemon5;
+        pokemon6 = Assets.pokemon6;
+        pokemon7 = Assets.pokemon7;
+        pokemon8 = Assets.pokemon8;
+        pokemon9 = Assets.pokemon9;
+        pokemon10 = Assets.pokemon10;
+        pokemon11 = Assets.pokemon11;
+        pokemon12 = Assets.pokemon12;
+        pokemon13 = Assets.pokemon13;
+        pokemon14 = Assets.pokemon14;
+        pokemon15 = Assets.pokemon15;
+        pokemon16 = Assets.pokemon16;
+        pokemon17 = Assets.pokemon17;
+        pokemon18 = Assets.pokemon18;
+        pokemon19 = Assets.pokemon19;
+        pokemon20 = Assets.pokemon20;
+        pokemon21 = Assets.pokemon21;
+        pokemon22 = Assets.pokemon22;
+        pokemon23 = Assets.pokemon23;
+        pokemon24 = Assets.pokemon24;
+        pokemon25 = Assets.pokemon25;
+        pokemon26 = Assets.pokemon26;
+        pokemon27 = Assets.pokemon27;
+        pokemon28 = Assets.pokemon28;
+        pokemon29 = Assets.pokemon29;
+        pokemon30 = Assets.pokemon30;
+        pokenmonanim = new Animation();
+
+        pokenmonanim.addFrame(pokemon1,100);
+        pokenmonanim.addFrame(pokemon2,100);
+        pokenmonanim.addFrame(pokemon3,100);
+        pokenmonanim.addFrame(pokemon4,100);
+        pokenmonanim.addFrame(pokemon5,100);
+        pokenmonanim.addFrame(pokemon6,100);
+        pokenmonanim.addFrame(pokemon7,100);
+        pokenmonanim.addFrame(pokemon8,100);
+        pokenmonanim.addFrame(pokemon9,100);
+        pokenmonanim.addFrame(pokemon10,100);
+        pokenmonanim.addFrame(pokemon11,100);
+        pokenmonanim.addFrame(pokemon12,100);
+        pokenmonanim.addFrame(pokemon13,100);
+        pokenmonanim.addFrame(pokemon14,100);
+        pokenmonanim.addFrame(pokemon15,100);
+        pokenmonanim.addFrame(pokemon16,100);
+        pokenmonanim.addFrame(pokemon17,100);
+        pokenmonanim.addFrame(pokemon18,100);
+        pokenmonanim.addFrame(pokemon19,100);
+        pokenmonanim.addFrame(pokemon20,100);
+        pokenmonanim.addFrame(pokemon21,100);
+        pokenmonanim.addFrame(pokemon22,100);
+        pokenmonanim.addFrame(pokemon23,100);
+        pokenmonanim.addFrame(pokemon24,100);
+        pokenmonanim.addFrame(pokemon25,100);
+        pokenmonanim.addFrame(pokemon26,100);
+        pokenmonanim.addFrame(pokemon27,100);
+        pokenmonanim.addFrame(pokemon28,100);
+        pokenmonanim.addFrame(pokemon29,100);
+        pokenmonanim.addFrame(pokemon30,100);
+
+
 
 
 
@@ -323,7 +453,7 @@ public class MultiplayerGameScreen extends Screen {
         for (int i = 0; i < numberOfBallsAdded; i++) {
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random() * 20);
-            int randkind = (int) (Math.random() * 4);
+            int randkind = (int) (Math.random() * 7);
 
 
             Ball newBall = new Ball(randX, 0);
@@ -344,7 +474,18 @@ public class MultiplayerGameScreen extends Screen {
                 newBall.setRadius(26);
                 newBall.setElapsedTime(50);
                 newBall.setAnimation(magicanim);
-
+            }else  if(randkind == 4){
+                newBall.setRadius(32);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(basketballanim);
+            }else  if(randkind == 5){
+                newBall.setRadius(37);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(socanim);
+            }else  if(randkind == 6){
+                newBall.setRadius(35);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(pokenmonanim);
             }
 
 
@@ -679,7 +820,7 @@ public class MultiplayerGameScreen extends Screen {
         g.drawString("HP: ", 25, 58, paint);
         g.drawRect(70, 35, HP*200/MAX_HP+10, 30, 0xFFE2F5A7);
         g.drawRect(75, 40, HP*200/MAX_HP, 20, 0xFF85E61D );
-     //   g.drawString("HP: " + HP, 150, 80, paint);
+
     }
 
     private void drawRunningUI() {

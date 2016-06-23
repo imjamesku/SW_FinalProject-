@@ -29,6 +29,9 @@ public class Assets {
     public static Image basketball,basketball2,basketball3,basketball4,basketball5,basketball6,basketball7,basketball8,basketball9,basketball10;
     public static Image basketball11,basketball12,basketball13,basketball14,basketball15;
     public static Image soc,soc3,soc4,soc5,soc6,soc7,soc8,soc9,soc10;
+    public static Image pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6,pokemon7,pokemon8,pokemon9,pokemon10;
+    public static Image pokemon11,pokemon12,pokemon13,pokemon14,pokemon15,pokemon16,pokemon17,pokemon18,pokemon19,pokemon20;
+    public static Image pokemon21,pokemon22,pokemon23,pokemon24,pokemon25,pokemon26,pokemon27,pokemon28,pokemon29,pokemon30;
 
 
     public static void load(SampleGame sampleGame) {

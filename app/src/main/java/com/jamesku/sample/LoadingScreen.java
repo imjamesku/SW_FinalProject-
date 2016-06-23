@@ -161,6 +161,38 @@ public class LoadingScreen extends Screen {
         Assets.soc9 = g.newImage("soc9.png",ImageFormat.ARGB4444);
         Assets.soc10 = g.newImage("soc10.png",ImageFormat.ARGB4444);
 
+        Assets.pokemon1 = g.newImage("pokemon1.png",ImageFormat.ARGB4444);
+        Assets.pokemon2 = g.newImage("pokemon2.png",ImageFormat.ARGB4444);
+        Assets.pokemon3 = g.newImage("pokemon3.png",ImageFormat.ARGB4444);
+        Assets.pokemon4 = g.newImage("pokemon4.png",ImageFormat.ARGB4444);
+        Assets.pokemon5 = g.newImage("pokemon5.png",ImageFormat.ARGB4444);
+        Assets.pokemon6 = g.newImage("pokemon6.png",ImageFormat.ARGB4444);
+        Assets.pokemon7 = g.newImage("pokemon7.png",ImageFormat.ARGB4444);
+        Assets.pokemon8 = g.newImage("pokemon8.png",ImageFormat.ARGB4444);
+        Assets.pokemon9 = g.newImage("pokemon9.png",ImageFormat.ARGB4444);
+        Assets.pokemon10 = g.newImage("pokemon10.png",ImageFormat.ARGB4444);
+        Assets.pokemon11 = g.newImage("pokemon11.png",ImageFormat.ARGB4444);
+        Assets.pokemon12 = g.newImage("pokemon12.png",ImageFormat.ARGB4444);
+        Assets.pokemon13 = g.newImage("pokemon13.png",ImageFormat.ARGB4444);
+        Assets.pokemon14 = g.newImage("pokemon14.png",ImageFormat.ARGB4444);
+        Assets.pokemon15 = g.newImage("pokemon15.png",ImageFormat.ARGB4444);
+        Assets.pokemon16 = g.newImage("pokemon16.png",ImageFormat.ARGB4444);
+        Assets.pokemon17 = g.newImage("pokemon17.png",ImageFormat.ARGB4444);
+        Assets.pokemon18 = g.newImage("pokemon18.png",ImageFormat.ARGB4444);
+        Assets.pokemon19 = g.newImage("pokemon19.png",ImageFormat.ARGB4444);
+        Assets.pokemon20 = g.newImage("pokemon20.png",ImageFormat.ARGB4444);
+        Assets.pokemon21 = g.newImage("pokemon21.png",ImageFormat.ARGB4444);
+        Assets.pokemon22 = g.newImage("pokemon22.png",ImageFormat.ARGB4444);
+        Assets.pokemon23 = g.newImage("pokemon23.png",ImageFormat.ARGB4444);
+        Assets.pokemon24 = g.newImage("pokemon24.png",ImageFormat.ARGB4444);
+        Assets.pokemon25 = g.newImage("pokemon25.png",ImageFormat.ARGB4444);
+        Assets.pokemon26 = g.newImage("pokemon26.png",ImageFormat.ARGB4444);
+        Assets.pokemon27 = g.newImage("pokemon27.png",ImageFormat.ARGB4444);
+        Assets.pokemon28 = g.newImage("pokemon28.png",ImageFormat.ARGB4444);
+        Assets.pokemon29 = g.newImage("pokemon29.png",ImageFormat.ARGB4444);
+        Assets.pokemon30 = g.newImage("pokemon30.png",ImageFormat.ARGB4444);
+
+
 
 
 

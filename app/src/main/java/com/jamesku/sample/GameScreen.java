@@ -59,6 +59,12 @@ public class GameScreen extends Screen {
     private Animation basketballanim;
     private Image soc,soc3,soc4,soc5,soc6,soc7,soc8,soc9,soc10;
     private Animation socanim;
+    private Image pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6,pokemon7,pokemon8,pokemon9,pokemon10;
+    private Image pokemon11,pokemon12,pokemon13,pokemon14,pokemon15,pokemon16,pokemon17,pokemon18,pokemon19,pokemon20;
+    private Image pokemon21,pokemon22,pokemon23,pokemon24,pokemon25,pokemon26,pokemon27,pokemon28,pokemon29,pokemon30;
+    private Animation pokenmonanim;
+
+    final private int MAX_HP = 15;
 
     int livesLeft = 1;
     Paint paint, paint2;
@@ -78,7 +84,7 @@ public class GameScreen extends Screen {
         addBallFreq = 5;
         addBallCounter = 0;
         score = 0;
-        HP = 10;
+        HP = MAX_HP;
 
         // Initialize game objects here
 
@@ -248,6 +254,69 @@ public class GameScreen extends Screen {
         socanim.addFrame(soc9,100);
         socanim.addFrame(soc10,100);
 
+        pokemon1 = Assets.pokemon1;
+        pokemon2 = Assets.pokemon2;
+        pokemon3 = Assets.pokemon3;
+        pokemon4 = Assets.pokemon4;
+        pokemon5 = Assets.pokemon5;
+        pokemon6 = Assets.pokemon6;
+        pokemon7 = Assets.pokemon7;
+        pokemon8 = Assets.pokemon8;
+        pokemon9 = Assets.pokemon9;
+        pokemon10 = Assets.pokemon10;
+        pokemon11 = Assets.pokemon11;
+        pokemon12 = Assets.pokemon12;
+        pokemon13 = Assets.pokemon13;
+        pokemon14 = Assets.pokemon14;
+        pokemon15 = Assets.pokemon15;
+        pokemon16 = Assets.pokemon16;
+        pokemon17 = Assets.pokemon17;
+        pokemon18 = Assets.pokemon18;
+        pokemon19 = Assets.pokemon19;
+        pokemon20 = Assets.pokemon20;
+        pokemon21 = Assets.pokemon21;
+        pokemon22 = Assets.pokemon22;
+        pokemon23 = Assets.pokemon23;
+        pokemon24 = Assets.pokemon24;
+        pokemon25 = Assets.pokemon25;
+        pokemon26 = Assets.pokemon26;
+        pokemon27 = Assets.pokemon27;
+        pokemon28 = Assets.pokemon28;
+        pokemon29 = Assets.pokemon29;
+        pokemon30 = Assets.pokemon30;
+        pokenmonanim = new Animation();
+
+        pokenmonanim.addFrame(pokemon1,100);
+        pokenmonanim.addFrame(pokemon2,100);
+        pokenmonanim.addFrame(pokemon3,100);
+        pokenmonanim.addFrame(pokemon4,100);
+        pokenmonanim.addFrame(pokemon5,100);
+        pokenmonanim.addFrame(pokemon6,100);
+        pokenmonanim.addFrame(pokemon7,100);
+        pokenmonanim.addFrame(pokemon8,100);
+        pokenmonanim.addFrame(pokemon9,100);
+        pokenmonanim.addFrame(pokemon10,100);
+        pokenmonanim.addFrame(pokemon11,100);
+        pokenmonanim.addFrame(pokemon12,100);
+        pokenmonanim.addFrame(pokemon13,100);
+        pokenmonanim.addFrame(pokemon14,100);
+        pokenmonanim.addFrame(pokemon15,100);
+        pokenmonanim.addFrame(pokemon16,100);
+        pokenmonanim.addFrame(pokemon17,100);
+        pokenmonanim.addFrame(pokemon18,100);
+        pokenmonanim.addFrame(pokemon19,100);
+        pokenmonanim.addFrame(pokemon20,100);
+        pokenmonanim.addFrame(pokemon21,100);
+        pokenmonanim.addFrame(pokemon22,100);
+        pokenmonanim.addFrame(pokemon23,100);
+        pokenmonanim.addFrame(pokemon24,100);
+        pokenmonanim.addFrame(pokemon25,100);
+        pokenmonanim.addFrame(pokemon26,100);
+        pokenmonanim.addFrame(pokemon27,100);
+        pokenmonanim.addFrame(pokemon28,100);
+        pokenmonanim.addFrame(pokemon29,100);
+        pokenmonanim.addFrame(pokemon30,100);
+
 
         // Defining a paint object
         paint = new Paint();
@@ -332,8 +401,8 @@ public class GameScreen extends Screen {
         for(int i=0; i<numberOfBallsAdded; i++){
             int randX = (int) (Math.random() * 800);
             int randSpeedX = (int) (Math.random()*20);
-            int randkind = (int)(Math.random()*6);
-          
+            int randkind = (int)(Math.random()*7);
+
 
             Ball newBall = new Ball(randX, 0);
 
@@ -361,6 +430,10 @@ public class GameScreen extends Screen {
                 newBall.setRadius(37);
                 newBall.setElapsedTime(50);
                 newBall.setAnimation(socanim);
+            }else  if(randkind == 6){
+                newBall.setRadius(35);
+                newBall.setElapsedTime(50);
+                newBall.setAnimation(pokenmonanim);
             }
 
 
@@ -524,14 +597,15 @@ public class GameScreen extends Screen {
 
     private void drawScoreHP() {
         Graphics g = game.getGraphics();
-
         Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(30);
+        paint.setColor(0xFFB30059);
+        paint.setTextSize(25);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        g.drawString("Score: " + score, 350, 80, paint);
-        g.drawString("HP: " + HP, 50, 80, paint);
+        g.drawString("Score: " + score, 350, 58, paint);
+        g.drawString("HP: ", 25, 58, paint);
+        g.drawRect(70, 35, HP*200/MAX_HP+10, 30, 0xFFE2F5A7);
+        g.drawRect(75, 40, HP*200/MAX_HP, 20, 0xFF85E61D );
 
     }
 
@@ -573,15 +647,19 @@ public class GameScreen extends Screen {
 
     @Override
     public void pause() {
-        if (state == GameState.Running)
+        if (state == GameState.Running) {
             state = GameState.Paused;
+            Assets.theme.pause();
+        }
 
     }
 
     @Override
     public void resume() {
-        if (state == GameState.Paused)
+        if (state == GameState.Paused) {
             state = GameState.Running;
+            Assets.theme.play();
+        }
     }
 
     @Override
